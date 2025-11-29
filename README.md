@@ -1,9 +1,13 @@
 # YÜKSEK LİSANS TEZ ÖNERİSİ
 
 **Öğrenci Adı:** Yusuf Talha Arabacı
+
 **Anabilim Dalı:** Yazılım Mühendisliği
+
 **Proje Kod Adı:** Ubuntu Sovereign Stack
+
 **Tez Başlığı (TR):** Ubuntu Tabanlı Açık Kaynak Kurumsal Mimari: Bulut Bağımlılığına Karşı Veri Egemenliği Odaklı Bir Alternatif Model
+
 **Tez Başlığı (EN):** Ubuntu-Based Open Source Enterprise Architecture: An Alternative Model Focused on Data Sovereignty Against Cloud Dependency
 
 ---
