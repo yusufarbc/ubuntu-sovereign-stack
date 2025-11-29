@@ -1,6 +1,52 @@
 # ubuntu-sovereign-stack
 An open-source, on-premise enterprise architecture based on Ubuntu LTS, Kubernetes/Podman, and Wazuh to ensure data sovereignty and eliminate cloud dependency
 
+Bahsettiğin **"Azure Muhtaçlığı" (Vendor Lock-in)** ve **"Yasal Uyumsuzluk" (Compliance Mismatch)** riski, bu tezin **"Neden?"** sorusunun en güçlü cevabıdır. Bu başlık, tezi teknik bir kurulum projesinden çıkarıp stratejik bir araştırma haline getirir.
+
+"Microsoft Cloud-First" stratejisinin neden GDPR ve KVKK ile çeliştiğini ve bunun senin tezin için nasıl bir **"savunma kalkanı"** olduğunu akademik bir dille şöyle temellendirebilirsin:
+
+### 1. Temel Çatışma: Veri Egemenliği vs. ABD Yasaları
+
+Sorunun kökü teknik değil, **yargı yetkisi (jurisdiction)** sorunudur. Senin tezin, teknik bir çözüm (Open Source On-Premise) ile bu yasal açığı kapattığını iddia ediyor.
+
+* **ABD CLOUD Act (Clarifying Lawful Overseas Use of Data Act):** Bu yasa, ABD menşeli şirketlerin (Microsoft, Google, AWS) verileri nerede saklanırsa saklansın (isterse İstanbul'da, isterse İrlanda'da sunucuları olsun), ABD kolluk kuvvetleri talep ettiğinde bu veriyi teslim etmesini zorunlu kılar.
+* **GDPR & KVKK (Madde 9):** Kişisel verilerin, yeterli korumaya sahip olmayan ülkelere (ABD gibi) aktarılmasını yasaklar.
+* **Çatışma:** Microsoft, "Ben veriyi Avrupa'da tutuyorum" dese bile, şirket merkezi ABD'de olduğu için CLOUD Act kapsamındadır. Bu durum, KVKK ve GDPR açısından **"yasadışı veri transferi"** riski doğurur.
+
+
+
+> **Tez İçin Kritik Kanıt (Case Study):** Mart 2024'te **Avrupa Veri Koruma Denetçisi (EDPS)**, Avrupa Komisyonu'nun **Microsoft 365** kullanımının veri koruma kurallarını ihlal ettiğine karar verdi ve veri akışının durdurulmasını istedi. Bu karar, senin tezin için "altın değerinde" bir referanstır. *"Avrupa Birliği'nin kendi kurumu bile Microsoft kullanırken yasaları ihlal ediyorsa, Türk kurumları nasıl güvende olabilir?"* sorusu tezin temel dayanağıdır.
+
+### 2. "Azure Muhtaçlığı" (Vendor Lock-in) Döngüsü
+
+Microsoft'un "Cloud-First" stratejisi, müşteriyi sadece buluta çekmek değil, oradan çıkmasını imkansız hale getirmek üzerine kuruludur. Tezin, bu zincirleri kıran bir model önerdiği için değerlidir.
+
+* **Veri Yerçekimi (Data Gravity):** Veri Azure'a bir kez girdiğinde, onu dışarı çıkarmak (Egress fees) çok pahalıdır.
+* **Teknik Bağımlılık:** Active Directory (AD) yapısı Azure AD (Entra ID) ile hibrit hale geldiğinde, kurum içi (on-prem) sistemler yavaş yavaş "ikinci sınıf vatandaş" muamelesi görmeye başlar. Bir süre sonra Exchange On-Premise lisansı bulmak veya güncellemek zorlaşır, kurum mecburiyetten tamamen buluta geçer.
+* **SaaS Tuzağı:** Office 365 sadece bir e-posta hizmeti değil, SharePoint, Teams ve OneDrive ile örülmüş bir ağdır. Birini bıraksanız diğerine bağlı kalırsınız.
+
+
+
+### 3. Senin Tezin Bu Sorunu Nasıl Çözüyor?
+
+Senin önerdiğin mimarinin bu risklere karşı sunduğu çözüm matrisi şu şekildedir (Tezinde bu tabloyu kullanabilirsin):
+
+| Risk Faktörü | Microsoft (Azure/O365) Durumu | Senin Önerdiğin Mimari (On-Premise OSS) |
+| :--- | :--- | :--- |
+| **Yasal Erişim (Legal Access)** | ABD CLOUD Act'e tabi. Veri ABD devletine verilebilir. | Sadece Türk Hukukuna (KVKK) tabi. Veri kurum dışına çıkmaz. |
+| **Veri Konumu (Residency)** | "Region" seçseniz bile yönetim paneli (Control Plane) ABD'dedir. | %100 Kurum İçi (On-Prem). Fiziksel erişim kurumdadır. |
+| **Bağımlılık (Lock-in)** | Tescilli API'lar ve Egress ücretleri ile çıkış zor. | Açık standartlar (IMAP, CalDAV, CardDAV). Göç etmek kolay. |
+| **Lisanslama** | Sürekli artan abonelik (OpEx) maliyeti. | Açık kaynak (GPL/Apache). Maliyet donanım ve insan gücüdür. |
+| **Kimlik Yönetimi** | Azure AD (Entra ID) bağımlılığı. | Samba 4 AD + Authentik (Platform bağımsız SSO). |
+
+### 4. Akademik Tavsiye: Bunu Teze Nasıl Yedirirsin?
+
+Bu konuyu tezin **"Giriş"** ve **"Problem Tanımı"** kısmında şu şekilde vurgulamalısın:
+
+> *"Mevcut literatür genellikle buluta geçişin teknik avantajlarına odaklanırken; ABD CLOUD Act kaynaklı veri egemenliği risklerini ve 'Vendor Lock-in' (Tedarikçi Kilidi) maliyetlerini göz ardı etmektedir. Özellikle **T.C. Cumhurbaşkanlığı Dijital Dönüşüm Ofisi Bilgi ve İletişim Güvenliği Rehberi**'nin 'verinin yerli ve milli imkanlarla saklanması' ilkesi göz önüne alındığında, Microsoft ekosistemine olan bağımlılık ulusal bir güvenlik riski oluşturmaktadır. Bu tez, söz konusu riskleri bertaraf eden, yasal olarak güvenli ve teknik olarak sürdürülebilir bir açık kaynak mimari önermektedir."*
+
+**Özetle:** Evet, "Azure Muhtaçlığı" ve "CLOUD Act Riski" tezin bel kemiğidir. Bu argümanlar, çalışmanı basit bir "Linux sunucu kurulumu" olmaktan çıkarıp, **stratejik bir siber güvenlik ve veri politikası tezi** haline getirir.
+
 **Tez Önerisi Özeti:**
 
 Bu tez, kurumların Microsoft Azure ve Office 365 gibi küresel bulut sağlayıcılarına bağımlılığını azaltmayı ve veri egemenliğini (data sovereignty) hem yasal hem de teknik olarak güvence altına almayı amaçlayan, tamamen açık kaynaklı ve kurum içi (on-premise) bir BT mimarisi önermektedir. Microsoft'un "Cloud-First" stratejisi ve CLOUD Act gibi yasaların yarattığı risklere karşı, kurumların verilerini kendi kontrolünde tutabileceği bir "Egemen Bulut" (Sovereign Cloud) modeli sunulmaktadır.
