@@ -1,12 +1,21 @@
 # ubuntu-sovereign-stack
 An open-source, on-premise enterprise architecture based on Ubuntu LTS, Kubernetes/Podman, and Wazuh to ensure data sovereignty and eliminate cloud dependency
 
+**Tez Önerisi Özeti:**
 
-Harika bir karar. Proje kapsamını ("scope") yönetilebilir tutmak ve odağı dağıtmamak adına **Zimbra**'yı tek ve merkezi iletişim platformu olarak konumlandırmak, tez jürisi karşısında **"sürdürülebilir ve yalın mimari"** argümanınızı güçlendirecektir. Zimbra zaten e-posta, takvim, rehber ve dosya paylaşım özellikleriyle kurumsal iletişimin %80-90'ını tek başına karşılamaktadır.
+Bu tez, kurumların Microsoft Azure ve Office 365 gibi küresel bulut sağlayıcılarına bağımlılığını azaltmayı ve veri egemenliğini (data sovereignty) hem yasal hem de teknik olarak güvence altına almayı amaçlayan, tamamen açık kaynaklı ve kurum içi (on-premise) bir BT mimarisi önermektedir. Microsoft'un "Cloud-First" stratejisi ve CLOUD Act gibi yasaların yarattığı risklere karşı, kurumların verilerini kendi kontrolünde tutabileceği bir "Egemen Bulut" (Sovereign Cloud) modeli sunulmaktadır.
 
-Bu kararla birlikte; mimari daha sadeleşti, kaynak kullanımı azaldı ve **"Exchange Alternatifi"** vurgusu daha net hale geldi.
+**Önerilen Mimarinin Temel Bileşenleri:**
 
-Aşağıda, **Zulip/Mattermost'un çıkarıldığı**, Zimbra'nın rolünün netleştirildiği ve bugüne kadar konuştuğumuz tüm teknik detayların (Podman, 10 İstemci, Wazuh, CLOUD Act) işlendiği **Nihai ve Tamamlanmış Yüksek Lisans Tez Önerisi** yer almaktadır.
+* **Sunucu Altyapısı:** Ubuntu Server LTS üzerinde Rancher tarafından yönetilen Kubernetes kümeleri ve Docker yerine daha güvenli olan **Podman** konteyner teknolojisi kullanılacaktır.
+* **Kimlik ve Erişim Yönetimi:** Windows AD ile tam uyumlu **Samba 4 Active Directory** ve tüm uygulamalar için SSO/MFA sağlayan **Authentik** kullanılacaktır.
+* **İletişim ve İşbirliği:** Microsoft Exchange alternatifi olarak e-posta, takvim ve dosya paylaşımı için **Zimbra Collaboration Suite**; güvenlik için ise **SpamAssassin** ve **ClamAV** entegrasyonu sağlanacaktır.
+* **Güvenlik ve Gözlemlenebilirlik:** Merkezi log yönetimi, saldırı tespiti ve zafiyet taraması için **Wazuh**; sistem izleme için **Prometheus** ve **Grafana** kullanılacaktır.
+* **İstemci Katmanı:** Tek tip sistem yerine, kullanıcı profillerine göre (ofis çalışanı, yönetici, mühendis vb.) özelleştirilmiş **10 farklı Ubuntu LTS tabanlı dağıtım** (Linux Mint, Zorin OS, Pop!_OS vb.) sunulacaktır.
+
+**Araştırmanın Hedefleri:**
+
+Çalışma, bu mimariyi maliyet (TCO), yasal güvenlik (CLOUD Act risklerinin eliminasyonu) ve teknik yönetilebilirlik açısından ticari muadilleriyle karşılaştırmalı olarak analiz etmeyi ve uygulanabilir bir alternatif model ortaya koymayı hedeflemektedir.
 
 ---
 
