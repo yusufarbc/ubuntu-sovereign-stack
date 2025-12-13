@@ -15,6 +15,8 @@ TEMPLATE_HEADER = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} - Ubuntu Sovereign Stack</title>
+    <meta name="description" content="Documentation for Ubuntu Sovereign Stack - An open-source, on-premise enterprise architecture.">
+    <meta name="author" content="Ubuntu Sovereign Stack Project">
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         /* Local overrides for docs readability */
@@ -183,13 +185,19 @@ def main():
     for filename in os.listdir(SOURCE_DIR):
         if filename.endswith('.md'):
             source_path = os.path.join(SOURCE_DIR, filename)
-            target_filename = filename.replace('.md', '.html').lower()
+            if filename.lower() == 'readme.md':
+                target_filename = 'index.html'
+            else:
+                target_filename = filename.replace('.md', '.html').lower()
+            
             target_path = os.path.join(TARGET_DIR, target_filename)
 
             with open(source_path, 'r', encoding='utf-8') as f:
                 md_content = f.read()
 
             title = filename.replace('.md', '').replace('_', ' ').title()
+            if target_filename == 'index.html':
+                title = "Documentation Index"
             
             # Determine Active Link
             active_proposal = 'active' if 'proposal' in target_filename else ''
