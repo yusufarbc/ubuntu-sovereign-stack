@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--text-light);
+            color: var(--ubuntu-orange);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Architecture Section */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .arch-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--ubuntu-orange);
+        }
+
+        /* Distro Grid */
+        .distro-section {
+            background-color: var(--bg-light);
+        }
+
+        .distro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .distro-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s;
+            border: 1px solid #eee;
+        }
+
+        .distro-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ubuntu-purple);
+        }
+
+        .distro-name {
+            color: var(--ubuntu-purple);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .distro-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Ubuntu Sovereign Stack</h1>
+            <p class="hero-subtitle">Open-Source Enterprise Architecture for Data Sovereignty</p>
+            <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn">View on GitHub</a>
+        </div>
+    </header>
+
+    <section class="container">
+        <h2>Server Architecture</h2>
+        <p>A robust, on-premise foundation built to eliminate cloud dependency.</p>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Infrastructure</h3>
+                <p>3x Physical Nodes running <strong>Ubuntu Server LTS</strong>. Bare-metal performance with zero virtualization overhead.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Orchestration</h3>
+                <p><strong>Kubernetes (RKE2)</strong> managed by Rancher. FIPS-compliant and secure by design.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Runtime</h3>
+                <p><strong>Podman</strong>. A daemonless, rootless container engine strategy. No Docker daemon security risks.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="distro-section">
+        <section class="container">
+            <h2>The "Flexible 10" Client Strategy</h2>
+            <p>One OS does not fit all. We provide a tailored Ubuntu-based distribution for every role in your organization.</p>
+            
+            <div class="distro-grid">
+                <div class="distro-card">
+                    <span class="distro-name">Ubuntu Desktop</span>
+                    <span class="distro-role">Standard Corporate</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">Linux Mint</span>
+                    <span class="distro-role">Office / Admin</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">Zorin OS</span>
+                    <span class="distro-role">Management</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">Pop!_OS</span>
+                    <span class="distro-role">Engineers / R&D</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">Kubuntu</span>
+                    <span class="distro-role">Power Users</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">Xubuntu</span>
+                    <span class="distro-role">Legacy Hardware</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">Lubuntu</span>
+                    <span class="distro-role">Thin Clients</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">Ubuntu MATE</span>
+                    <span class="distro-role">Traditionalists</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">elementary OS</span>
+                    <span class="distro-role">Kiosks / Public</span>
+                </div>
+                <div class="distro-card">
+                    <span class="distro-name">KDE Neon</span>
+                    <span class="distro-role">Testing / Bleeding Edge</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. A Master's Thesis Project.</p>
+    </footer>
+
+</body>
+</html>

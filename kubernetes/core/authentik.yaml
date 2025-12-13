@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: identity
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-server
+  namespace: identity
+  labels:
+    app: authentik
+    component: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik
+      component: server
+  template:
+    metadata:
+      labels:
+        app: authentik
+        component: server
+    spec:
+      containers:
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2023.10
+          command: ["./server"]
+          env:
+            - name: AUTHENTIK_REDIS__HOST
+              value: "redis"
+            - name: AUTHENTIK_POSTGRESQL__HOST
+              value: "postgresql"
+            - name: AUTHENTIK_POSTGRESQL__USER
+              value: "authentik"
+            - name: AUTHENTIK_POSTGRESQL__NAME
+              value: "authentik"
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              value: "secret_password_change_me" # Replace with secret
+            - name: AUTHENTIK_SECRET_KEY
+              value: "generate_a_random_secret_key_change_me" # Replace with secret
+          ports:
+            - containerPort: 9000
+              name: http
+            - containerPort: 9443
+              name: https
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-worker
+  namespace: identity
+  labels:
+    app: authentik
+    component: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: authentik
+        component: worker
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/goauthentik/server:2023.10
+          command: ["./worker"]
+          env:
+            - name: AUTHENTIK_REDIS__HOST
+              value: "redis"
+            - name: AUTHENTIK_POSTGRESQL__HOST
+              value: "postgresql"
+            - name: AUTHENTIK_POSTGRESQL__USER
+              value: "authentik"
+            - name: AUTHENTIK_POSTGRESQL__NAME
+              value: "authentik"
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              value: "secret_password_change_me"
+            - name: AUTHENTIK_SECRET_KEY
+              value: "generate_a_random_secret_key_change_me"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentik-server
+  namespace: identity
+spec:
+  ports:
+    - port: 80
+      targetPort: 9000
+      name: http
+    - port: 443
+      targetPort: 9443
+      name: https
+  selector:
+    app: authentik
+    component: server

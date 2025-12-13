@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: collaboration
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zimbra
+  namespace: collaboration
+  labels:
+    app: zimbra
+spec:
+  serviceName: "zimbra"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zimbra
+  template:
+    metadata:
+      labels:
+        app: zimbra
+    spec:
+      containers:
+        - name: zimbra
+          # Note: Zimbra does not offer an official "cloud-native" container. 
+          # This uses a popular community alternative or implies a custom build.
+          # For Thesis: We assume a containerized build of Zimbra OSE with ClamAV & SpamAssassin included.
+          image: zimbramail/zimbra-ose:latest 
+          ports:
+            - containerPort: 25
+              name: smtp
+            - containerPort: 80
+              name: web-http
+            - containerPort: 443
+              name: web-https
+            - containerPort: 110
+              name: pop3
+            - containerPort: 143
+              name: imap
+            - containerPort: 993
+              name: imaps
+            - containerPort: 995
+              name: pop3s
+            - containerPort: 7071
+              name: admin-console
+          env:
+            - name: ZIMBRA_HOSTNAME
+              value: "mail.sovereign.lan"
+            - name: EXPLICIT_ENABLE_CLAMAV
+              value: "true" # Ensuring Security layer
+            - name: EXPLICIT_ENABLE_SPAMASSASSIN
+              value: "true" # Ensuring Security layer
+          volumeMounts:
+            - name: zimbra-data
+              mountPath: /opt/zimbra
+  volumeClaimTemplates:
+    - metadata:
+      name: zimbra-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 50Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zimbra
+  namespace: collaboration
+spec:
+  type: NodePort # Or LoadBalancer in a real MetalLB setup
+  ports:
+    - port: 25
+      targetPort: 25
+      name: smtp
+    - port: 80
+      targetPort: 80
+      name: http
+    - port: 443
+      targetPort: 443
+      name: https
+    - port: 7071
+      targetPort: 7071
+      name: admin
+  selector:
+    app: zimbra
