@@ -17,28 +17,15 @@ Instead of legacy virtualization, the system uses **Kubernetes (RKE2)** managed 
 *   **Runtime:** **Podman** is mandated as the container engine (Daemonless/Rootless) to mitigate security risks associated with the Docker daemon.
 
 ## Logical Architecture & Namespaces
-Services are logically isolated into Kubernetes Namespaces:
 
-### 1. `infrastructure` Namespace
-Core identity and directory services.
-*   **Samba 4 AD**: The "Source of Truth" for identity. Runs as a StatefulSet with persistent storage for NTDS.
-*   **Authentik**: IAM Provider. Syncs with Samba AD via LDAP. Provides SSO (SAML/OIDC) and enforces MFA.
+Services are logically isolated into Kubernetes Namespaces for security and resource management:
 
-### 2. `collaboration` Namespace
-Business applications.
-*   **Zimbra Collaboration Suite**: Deployment for Email, Calendar, and Contacts.
-    *   **Data Persistence**: `/opt/zimbra` mounted to Longhorn volumes.
-    *   **Security**: Internal ClamAV and SpamAssassin enabled.
-
-### 3. `security` Namespace
-Security and Intelligence services.
-*   **Wazuh Manager**: Central SIEM server receiving logs from all agents.
-*   **OpenVAS**: Vulnerability Scanner (Greenbone) for scheduled network scans.
-
-### 4. `monitoring` Namespace
-Cluster health and observability.
-*   **Prometheus**: Scrapes metrics from system nodes, Kubernetes API, and application pods.
-*   **Grafana**: Visualizes metrics via accessible dashboards (e.g., `grafana.sovereign.lan`).
+| Namespace | Services | Role & Configuration |
+| :--- | :--- | :--- |
+| `infrastructure` | **Samba 4 AD**<br>**Authentik** | **Core Identity:** AD serves as the "Source of Truth". Authentik syncs via LDAP to provide SSO (SAML/OIDC) and MFA. |
+| `collaboration` | **Zimbra Suite** | **Business Apps:** Email, Calendar, Contacts. Data persists on Longhorn volumes; secured by ClamAV/SpamAssassin. |
+| `security` | **Wazuh Manager**<br>**OpenVAS** | **Defensive Ops:** Central SIEM for log correlation and Vulnerability Scanner for network auditing. |
+| `monitoring` | **Prometheus**<br>**Grafana** | **Observability:** Scrapes metrics from nodes/pods and visualizes them via accessible dashboards (e.g., `grafana.sovereign.lan`). |
 
 ## Networking & Integration
 *   **Ingress Controller**: NGINX Ingress handles TLS termination and routing (Layer 7).

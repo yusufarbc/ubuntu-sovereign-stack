@@ -36,36 +36,59 @@
             <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
             <h1>Tools &amp; Components</h1>
 <h2>Core Components Selection Rationale</h2>
-<h3>Operating System: Ubuntu Server LTS</h3>
-<p><strong>Why:</strong> Reliability and Support.</p>
-<p>Canonical provides 5 years of free security updates for LTS releases. This eliminates the need for frequent <code>dist-upgrades</code> and ensures a stable production environment. It serves as the ubiquitous standard for Linux server deployments.</p>
-<h3>Orchestration: Kubernetes with Rancher</h3>
-<p><strong>Why:</strong> Modern Management &amp; Abstraction.</p>
-<p>While Kubernetes handles the scheduling, <strong>Rancher</strong> provides the management layer that rivals proprietary clouds. It simplifies upgrades, access control, and observability, making the complexity of K8s manageable for typical IT teams.</p>
-<h3>Container Runtime: Podman</h3>
-<p><strong>Why:</strong> Security (Rootless/Daemonless).</p>
-<p>Unlike Docker, which requires a central daemon running as root (a single point of failure and security risk), <strong>Podman</strong> runs containers as independent processes. This "Daemonless" architecture is a critical security requirement for a sovereign stack.</p>
-<h2>Application Stack</h2>
-<h3>Identity: Authentik &amp; Samba 4</h3>
-<ul>
-<li>  <strong>Samba 4 Active Directory</strong>: Chosen for its robust compatibility with the Active Directory protocol. It allows the system to support Windows clients (if necessary) and standard LDAP integrations without Microsoft licensing.</li>
-<li>  <strong>Authentik</strong>: A modern, open-source Identity Provider (IdP). It bridges the legacy world (LDAP) with modern web standards (OIDC/SAML) and enforces policies like <strong>WebAuthn/TOTP MFA</strong>, which Samba cannot do natively on its own.</li>
-</ul>
-<h3>Collaboration: Zimbra Community Edition</h3>
-<p><strong>Why:</strong> Feature Parity with Exchange.</p>
-<p>Zimbra offers a complete suite (Email, Calendar, Contacts, File Sharing) with a mature Web UI. It is one of the few open-source solutions that effectively replaces the full functionality of Microsoft Exchange + Outlook Web App.</p>
-<ul>
-<li>  <strong>Security Integration</strong>: Includes <strong>ClamAV</strong> (Antivirus) and <strong>SpamAssassin</strong> (Antispam) out of the box.</li>
-</ul>
-<h3>Security: Wazuh (SIEM/XDR)</h3>
-<p><strong>Why:</strong> Unified Security Visibility.</p>
-<p>Wazuh serves as the "Digital Immune System". It correlates logs from the OS, Kubernetes, and Applications to detect anomalies (e.g., Brute Force attacks, File Integrity changes). It replaces solutions like Microsoft Sentinel.</p>
-<h3>Vulnerability Management: OpenVAS</h3>
-<p><strong>Why:</strong> Continuous Auditing.</p>
-<p>OpenVAS (Greenbone) provides the "Offensive" perspective, scanning the network for known CVEs and misconfigurations, ensuring the stack remains hardened against new threats.</p>
-<h3>Observability: Prometheus &amp; Grafana</h3>
-<p><strong>Why:</strong> Industry Standard Monitoring.</p>
-<p>Replaces proprietary monitoring tools (like SCOM). Prometheus pulls metrics; Grafana visualizes them. This pair provides deep insight into resource usage (CPU/RAM) and application health.</p>
+<table>
+<thead><tr>
+<th>Category</th>
+<th>Component</th>
+<th>Key Features &amp; Rationale</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Operating System</strong></td>
+<td><strong>Ubuntu Server LTS</strong></td>
+<td><strong>Reliability:</strong> 5 years of free security updates. Ubiquitous standard for Linux server deployments.</td>
+</tr>
+<tr>
+<td><strong>Orchestration</strong></td>
+<td><strong>Kubernetes (RKE2)</strong></td>
+<td><strong>Modern Management:</strong> Managed by <strong>Rancher</strong> to rival proprietary clouds. Simplifies upgrades and access control.</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong></td>
+<td><strong>Podman</strong></td>
+<td><strong>Security:</strong> Daemonless and rootless architecture eliminates the Docker daemon attack vector.</td>
+</tr>
+<tr>
+<td><strong>Directory</strong></td>
+<td><strong>Samba 4 AD</strong></td>
+<td><strong>Compatibility:</strong> Drop-in replacement for Active Directory. Supports Windows/Linux clients without CALs.</td>
+</tr>
+<tr>
+<td><strong>IAM / SSO</strong></td>
+<td><strong>Authentik</strong></td>
+<td><strong>Modern Identity:</strong> Bridges LDAP with OIDC/SAML. Enforces <strong>WebAuthn/TOTP MFA</strong> policy system-wide.</td>
+</tr>
+<tr>
+<td><strong>Email / Collab</strong></td>
+<td><strong>Zimbra CE</strong></td>
+<td><strong>Exchange Alternative:</strong> Full suite (Email, Calendar, Tasks). Includes ClamAV (Anti-virus) and SpamAssassin.</td>
+</tr>
+<tr>
+<td><strong>SIEM / XDR</strong></td>
+<td><strong>Wazuh</strong></td>
+<td><strong>Visibility:</strong> Correlates logs from OS, K8s, and Apps to detect anomalies (Digital Immune System).</td>
+</tr>
+<tr>
+<td><strong>Vulnerability</strong></td>
+<td><strong>OpenVAS</strong></td>
+<td><strong>Auditing:</strong> Continuous scanning for known CVEs and misconfigurations.</td>
+</tr>
+<tr>
+<td><strong>Observability</strong></td>
+<td><strong>Prometheus + Grafana</strong></td>
+<td><strong>Metrics:</strong> Industry standard for resource usage and application health monitoring.</td>
+</tr>
+</tbody></table>
+<p>&gt; <strong>Note:</strong> This selection prioritizes open-source licenses, data sovereignty, and enterprise-grade maturity over "bleeding edge" features.</p>
         </div>
     </div>
 

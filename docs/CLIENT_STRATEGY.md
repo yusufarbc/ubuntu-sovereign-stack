@@ -5,30 +5,13 @@ Forcing a single Linux distribution on all users creates friction. To successful
 
 ## Recommended Distributions
 
-### For Windows Migrants (The Majority)
-1.  **Linux Mint (Cinnamon Edition)**
-    *   **Target:** Office Workers, Administrative Staff.
-    *   **Why:** The Cinnamon desktop perfectly mimics the Windows 7/10 layout (Start Menu, Taskbar, System Tray). It reduces muscle memory friction.
-    *   **Pre-loaded:** LibreOffice, Firefox, Multimedia codecs.
-2.  **Zorin OS**
-    *   **Target:** Management, Executives.
-    *   **Why:** Highly polished visuals. Specific layouts can mimic Windows 11 or macOS, offering a premium "Aesthetic" feel that executives often prefer.
-
-### For Technical Staff
-3.  **Pop!_OS** (System76)
-    *   **Target:** Developers, Engineers, R&D.
-    *   **Why:** Native tiling window management, superior GPU driver handling (NVIDIA), and optimized for workflow speed.
-4.  **KDE Neon / Kubuntu**
-    *   **Target:** Power Users.
-    *   **Why:** Infinite configurability. KDE Plasma allows users to tweak every aspect of the OS.
-
-### For Specialized Hardware
-5.  **Xubuntu / Lubuntu**
-    *   **Target:** Legacy Hardware (Old PCs), Thin Clients.
-    *   **Why:** XFCE and LXQt are extremely lightweight, extending the lifecycle of hardware that cannot run modern Windows versions (reducing e-waste).
-6.  **elementary OS**
-    *   **Target:** Kiosks, Public Terminals.
-    *   **Why:** Locked-down, macOS-like interface that is simple and prevents accidental configuration changes.
+| Persona | Distribution | Rationale |
+| :--- | :--- | :--- |
+| **Office & Admin** | **Linux Mint** (Cinnamon) | **Windows-like:** Perfect mimic of Windows 7/10 layout (Start Menu, Taskbar). Reduces muscle memory friction. Pre-loaded with simple tools. |
+| **Management** | **Zorin OS** | **Premium Aesthetic:** Polished visuals that mimic Windows 11 or macOS. High-end feel for executives. |
+| **Engineers / R&D** | **Pop!_OS** | **Performance:** Native tiling window management and superior NVIDIA GPU handling. Optimized for dev speed. |
+| **Power Users** | **KDE Plasma** (Kubuntu) | **Configurability:** Infinite customization options for users who need to tweak every aspect of the OS. |
+| **Legacy / Kiosk** | **Xubuntu / elementary** | **Lightweight/Locked:** Xubuntu for old hardware (reduces e-waste); elementary OS for constrained, simple kiosk use cases. |
 
 ## Migration & Training Plan
 

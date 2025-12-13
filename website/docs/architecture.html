@@ -53,32 +53,34 @@
 <li>  <strong>Runtime:</strong> <strong>Podman</strong> is mandated as the container engine (Daemonless/Rootless) to mitigate security risks associated with the Docker daemon.</li>
 </ul>
 <h2>Logical Architecture &amp; Namespaces</h2>
-<p>Services are logically isolated into Kubernetes Namespaces:</p>
-<h3>1. `infrastructure` Namespace</h3>
-<p>Core identity and directory services.</p>
-<ul>
-<li>  <strong>Samba 4 AD</strong>: The "Source of Truth" for identity. Runs as a StatefulSet with persistent storage for NTDS.</li>
-<li>  <strong>Authentik</strong>: IAM Provider. Syncs with Samba AD via LDAP. Provides SSO (SAML/OIDC) and enforces MFA.</li>
-</ul>
-<h3>2. `collaboration` Namespace</h3>
-<p>Business applications.</p>
-<ul>
-<li>  <strong>Zimbra Collaboration Suite</strong>: Deployment for Email, Calendar, and Contacts.</li>
-<li>  <strong>Data Persistence</strong>: <code>/opt/zimbra</code> mounted to Longhorn volumes.</li>
-<li>  <strong>Security</strong>: Internal ClamAV and SpamAssassin enabled.</li>
-</ul>
-<h3>3. `security` Namespace</h3>
-<p>Security and Intelligence services.</p>
-<ul>
-<li>  <strong>Wazuh Manager</strong>: Central SIEM server receiving logs from all agents.</li>
-<li>  <strong>OpenVAS</strong>: Vulnerability Scanner (Greenbone) for scheduled network scans.</li>
-</ul>
-<h3>4. `monitoring` Namespace</h3>
-<p>Cluster health and observability.</p>
-<ul>
-<li>  <strong>Prometheus</strong>: Scrapes metrics from system nodes, Kubernetes API, and application pods.</li>
-<li>  <strong>Grafana</strong>: Visualizes metrics via accessible dashboards (e.g., <code>grafana.sovereign.lan</code>).</li>
-</ul>
+<p>Services are logically isolated into Kubernetes Namespaces for security and resource management:</p>
+<table>
+<thead><tr>
+<th>Namespace</th>
+<th>Services</th>
+<th>Role &amp; Configuration</th>
+</tr></thead><tbody>
+<tr>
+<td><code>infrastructure</code></td>
+<td><strong>Samba 4 AD</strong>&lt;br&gt;<strong>Authentik</strong></td>
+<td><strong>Core Identity:</strong> AD serves as the "Source of Truth". Authentik syncs via LDAP to provide SSO (SAML/OIDC) and MFA.</td>
+</tr>
+<tr>
+<td><code>collaboration</code></td>
+<td><strong>Zimbra Suite</strong></td>
+<td><strong>Business Apps:</strong> Email, Calendar, Contacts. Data persists on Longhorn volumes; secured by ClamAV/SpamAssassin.</td>
+</tr>
+<tr>
+<td><code>security</code></td>
+<td><strong>Wazuh Manager</strong>&lt;br&gt;<strong>OpenVAS</strong></td>
+<td><strong>Defensive Ops:</strong> Central SIEM for log correlation and Vulnerability Scanner for network auditing.</td>
+</tr>
+<tr>
+<td><code>monitoring</code></td>
+<td><strong>Prometheus</strong>&lt;br&gt;<strong>Grafana</strong></td>
+<td><strong>Observability:</strong> Scrapes metrics from nodes/pods and visualizes them via accessible dashboards (e.g., <code>grafana.sovereign.lan</code>).</td>
+</tr>
+</tbody></table>
 <h2>Networking &amp; Integration</h2>
 <ul>
 <li>  <strong>Ingress Controller</strong>: NGINX Ingress handles TLS termination and routing (Layer 7).</li>
