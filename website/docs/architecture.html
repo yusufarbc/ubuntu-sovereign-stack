@@ -4,114 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Architecture - Ubuntu Sovereign Stack</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        :root {
-            --ubuntu-orange: #E95420;
-            --ubuntu-purple: #772953;
-            --text-dark: #333333;
-            --text-light: #ffffff;
-            --bg-light: #f7f7f7;
-            --link-color: #007bff;
-        }
-
+        /* Local overrides for docs readability */
         body {
-            font-family: 'Ubuntu', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
-            color: var(--text-light);
-            padding: 2rem;
-            text-align: center;
-        }
-
-        header a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: white;
-        }
-
-        h1, h2, h3 { color: var(--ubuntu-purple); }
-        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
-        
-        a { color: var(--ubuntu-orange); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        code {
-            background-color: #f0f0f0;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-
-        pre {
-            background-color: #f4f4f4;
-            padding: 1rem;
-            border-radius: 4px;
-            overflow-x: auto;
-        }
-
-        blockquote {
-            border-left: 4px solid var(--ubuntu-orange);
-            margin: 0;
-            padding-left: 1rem;
-            color: #555;
-            font-style: italic;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 0.5rem;
-            text-align: left;
-        }
-
-        th { background-color: var(--bg-light); }
-
-        .nav-back {
-            display: block;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-        
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            background-color: #f7f9fc;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <div class="container" style="background: transparent; padding: 0;">
-            <a href="../index.html">Ubuntu Sovereign Stack</a>
+    <!-- Global Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="brand">Ubuntu Sovereign Stack</a>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="project_proposal.html" class="nav-link">Proposal</a></li>
+                <li><a href="vision.html" class="nav-link">Vision</a></li>
+                <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+                <li><a href="index.html" class="nav-link active">Docs</a></li>
+            </ul>
+            <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn-github" target="_blank">
+                GitHub &rarr;
+            </a>
         </div>
-    </header>
+    </nav>
 
     <div class="container">
-        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
-        <h1>System Architecture</h1>
+        <div class="docs-content">
+            <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary);">&larr; Back to Index</a>
+            <h1>System Architecture</h1>
 <h2>Overview</h2>
 <p>The proposed architecture is a holistic <strong>On-Premise Sovereign Cloud</strong> built on <strong>Ubuntu Server LTS</strong>. It is designed to replace the traditional Microsoft ecosystem (Windows Server/Hyper-V/Active Directory) with a modern, container-based open-source stack.</p>
 <h2>Physical Layer</h2>
@@ -170,6 +93,7 @@
 <li>  <strong>Velero</strong>: Backs up Kubernetes manifests to S3-compatible on-prem storage (e.g., MinIO or QNAP NAS).</li>
 <li>  <strong>Physical NAS</strong>: QNAP device receives nightly cold storage dumps.</li>
 </ul>
+        </div>
     </div>
 
     <footer>

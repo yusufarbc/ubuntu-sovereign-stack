@@ -5,236 +5,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ubuntu Sovereign Stack</title>
-    <style>
-        :root {
-            --ubuntu-orange: #E95420;
-            --ubuntu-purple: #772953;
-            --text-dark: #333333;
-            --text-light: #ffffff;
-            --bg-light: #f7f7f7;
-        }
-
-        body {
-            font-family: 'Ubuntu', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
-            color: var(--text-light);
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        section {
-            padding: 4rem 0;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--text-light);
-            color: var(--ubuntu-orange);
-            padding: 0.8rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 2rem;
-            transition: transform 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Architecture Section */
-        .architecture-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .arch-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border-top: 4px solid var(--ubuntu-orange);
-        }
-
-        /* Distro Grid */
-        .distro-section {
-            background-color: var(--bg-light);
-        }
-
-        .distro-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .distro-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.2s;
-            border: 1px solid #eee;
-        }
-
-        .distro-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--ubuntu-purple);
-        }
-
-        .distro-name {
-            color: var(--ubuntu-purple);
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .distro-role {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="container">
-            <h1>Ubuntu Sovereign Stack</h1>
-            <p class="hero-subtitle">Open-Source Enterprise Architecture for Data Sovereignty</p>
-            <div style="margin-bottom: 2rem; font-size: 1.1rem;">
-                <a href="docs/vision.html" style="color: white; text-decoration: underline; margin-right: 15px;">Vision
-                    Statement</a>
-                <a href="docs/project_proposal.html" style="color: white; text-decoration: underline;">Project
-                    Proposal</a>
+    <!-- Global Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand">Ubuntu Sovereign Stack</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="docs/project_proposal.html" class="nav-link">Proposal</a></li>
+                <li><a href="docs/vision.html" class="nav-link">Vision</a></li>
+                <li><a href="docs/architecture.html" class="nav-link">Architecture</a></li>
+                <li><a href="docs/index.html" class="nav-link">Docs</a></li>
+            </ul>
+            <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn-github" target="_blank">
+                GitHub &rarr;
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="nav-container" style="flex-direction: column; text-align: center;">
+            <h1 class="hero-title">Sovereignty by Design</h1>
+            <p class="hero-subtitle">
+                An enterprise-grade, open-source architecture enabling 100% data control.
+                Move beyond the cloud without sacrificing modern capabilities.
+            </p>
+            <div class="hero-actions">
+                <a href="docs/project_proposal.html" class="btn btn-primary">Read the Proposal</a>
+                <a href="docs/index.html" class="btn btn-secondary">Explore Documentation</a>
             </div>
-            <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn">View on GitHub</a>
-            <a href="docs/index.html" class="btn"
-                style="background-color: var(--ubuntu-purple); color: white; margin-left: 1rem;">Documentation</a>
         </div>
     </header>
 
+    <!-- Architecture Section -->
     <section class="container">
-        <h2 style="display: flex; justify-content: space-between; align-items: center;">
-            Server Architecture
-            <a href="docs/architecture.html"
-                style="font-size: 1rem; color: var(--ubuntu-orange); font-weight: normal;">View Full Architecture
-                &rarr;</a>
-        </h2>
-        <p>A robust, on-premise foundation built to eliminate cloud dependency.</p>
-        <div class="architecture-grid">
-            <div class="arch-card">
+        <div class="section-title">
+            <span>Server Architecture</span>
+            <a href="docs/architecture.html" class="section-link">Deep Dive &rarr;</a>
+        </div>
+        <div class="grid grid-3">
+            <div class="card">
+                <span class="arch-icon">🏗️</span>
                 <h3>Infrastructure</h3>
                 <p>3x Physical Nodes running <strong>Ubuntu Server LTS</strong>. Bare-metal performance with zero
                     virtualization overhead.</p>
             </div>
-            <div class="arch-card">
+            <div class="card">
+                <span class="arch-icon">☸️</span>
                 <h3>Orchestration</h3>
-                <p><strong>Kubernetes (RKE2)</strong> managed by Rancher. FIPS-compliant and secure by design.</p>
+                <p><strong>Kubernetes (RKE2)</strong> managed by Rancher. FIPS-compliant, secure, and centrally managed.
+                </p>
             </div>
-            <div class="arch-card">
-                <h3>Runtime</h3>
-                <p><strong>Podman</strong>. A daemonless, rootless container engine strategy. No Docker daemon security
-                    risks.</p>
+            <div class="card">
+                <span class="arch-icon">🛡️</span>
+                <h3>Runtime Security</h3>
+                <p><strong>Podman</strong>. A daemonless, rootless container engine strategy eliminating the Docker
+                    daemon attack vector.</p>
             </div>
         </div>
     </section>
 
-    <div class="distro-section">
-        <section class="container">
-            <h2 style="display: flex; justify-content: space-between; align-items: center;">
-                The "Flexible 10" Client Strategy
-                <a href="docs/client_strategy.html"
-                    style="font-size: 1rem; color: var(--ubuntu-purple); font-weight: normal;">View Strategy Docs
-                    &rarr;</a>
-            </h2>
-            <p>One OS does not fit all. We provide a tailored Ubuntu-based distribution for every role in your
-                organization.</p>
-
-            <div class="distro-grid">
-                <div class="distro-card">
-                    <span class="distro-name">Ubuntu Desktop</span>
-                    <span class="distro-role">Standard Corporate</span>
+    <!-- Client Strategy Section -->
+    <section style="background-color: #F9F9F9; padding: 4rem 0; margin-top: 4rem;">
+        <div class="container" style="padding: 0;">
+            <div class="section-title">
+                <span>The "Flexible 10" Client Strategy</span>
+                <a href="docs/client_strategy.html" class="section-link">View Strategy &rarr;</a>
+            </div>
+            <div class="grid grid-4" style="margin-top: 2rem;">
+                <div class="card" style="text-align: center;">
+                    <h3>Ubuntu Desktop</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Standard Corporate</p>
                 </div>
-                <div class="distro-card">
-                    <span class="distro-name">Linux Mint</span>
-                    <span class="distro-role">Office / Admin</span>
+                <div class="card" style="text-align: center;">
+                    <h3>Linux Mint</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Office / Admin</p>
                 </div>
-                <div class="distro-card">
-                    <span class="distro-name">Zorin OS</span>
-                    <span class="distro-role">Management</span>
+                <div class="card" style="text-align: center;">
+                    <h3>Zorin OS</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Management</p>
                 </div>
-                <div class="distro-card">
-                    <span class="distro-name">Pop!_OS</span>
-                    <span class="distro-role">Engineers / R&D</span>
+                <div class="card" style="text-align: center;">
+                    <h3>Pop!_OS</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Engineers / R&D</p>
                 </div>
-                <div class="distro-card">
-                    <span class="distro-name">Kubuntu</span>
-                    <span class="distro-role">Power Users</span>
+                <div class="card" style="text-align: center;">
+                    <h3>Kubuntu</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Power Users</p>
                 </div>
-                <div class="distro-card">
-                    <span class="distro-name">Xubuntu</span>
-                    <span class="distro-role">Legacy Hardware</span>
+                <div class="card" style="text-align: center;">
+                    <h3>Xubuntu</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Legacy Hardware</p>
                 </div>
-                <div class="distro-card">
-                    <span class="distro-name">Lubuntu</span>
-                    <span class="distro-role">Thin Clients</span>
+                <div class="card" style="text-align: center;">
+                    <h3>Lubuntu</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Thin Clients</p>
                 </div>
-                <div class="distro-card">
-                    <span class="distro-name">Ubuntu MATE</span>
-                    <span class="distro-role">Traditionalists</span>
-                </div>
-                <div class="distro-card">
-                    <span class="distro-name">elementary OS</span>
-                    <span class="distro-role">Kiosks / Public</span>
-                </div>
-                <div class="distro-card">
-                    <span class="distro-name">KDE Neon</span>
-                    <span class="distro-role">Testing / Bleeding Edge</span>
+                <div class="card" style="text-align: center;">
+                    <h3>elementary OS</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Kiosks / Public</p>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
     <footer>
-        <p>Ubuntu Sovereign Stack &copy; 2025. A Master's Thesis Project.</p>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Designed for Digital Independence.</p>
     </footer>
 
 </body>
