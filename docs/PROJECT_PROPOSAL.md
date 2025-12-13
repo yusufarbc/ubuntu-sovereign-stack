@@ -1,4 +1,4 @@
-# Thesis Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture
+# Project Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture
 
 **Title:** Ubuntu-Based Open-Source Enterprise Architecture: An Alternative Model to Microsoft's Cloud-First Approach from a Data Sovereignty Perspective
 
@@ -8,10 +8,10 @@
 **Client:** Ubuntu LTS and Derivatives
 
 ## Abstract
-This proposal presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM), OpenVAS (vulnerability scanning), and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The study aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.
+This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM), OpenVAS (vulnerability scanning), and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.
 
 ## 1. Introduction
-Accelerated digitalization in the public and private sectors has made cloud computing platforms attractive; however, it has also brought critical issues such as **data sovereignty**, privacy, and **Total Cost of Ownership (TCO)** to the forefront. Regulations like the **US CLOUD Act** increase the risk of data being subject to foreign legal demands. Specifically within the Microsoft ecosystem, steps such as the Azure-centric evolution of Windows Server 2019–2025 and the deprecation of WSUS are driving organizations towards hybrid/cloud solutions. This thesis evaluates an open-source, on-premise architecture against these risks using technical and managerial metrics.
+Accelerated digitalization in the public and private sectors has made cloud computing platforms attractive; however, it has also brought critical issues such as **data sovereignty**, privacy, and **Total Cost of Ownership (TCO)** to the forefront. Regulations like the **US CLOUD Act** increase the risk of data being subject to foreign legal demands. Specifically within the Microsoft ecosystem, steps such as the Azure-centric evolution of Windows Server 2019–2025 and the deprecation of WSUS are driving organizations towards hybrid/cloud solutions. This project evaluates an open-source, on-premise architecture against these risks using technical and managerial metrics.
 
 ## 2. Background – Microsoft’s Cloud-First Strategy vs. On-Prem Trends
 *   **Windows Server 2019:** Focus on sustaining classic on-prem workloads.

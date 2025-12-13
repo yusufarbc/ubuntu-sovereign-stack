@@ -33,8 +33,8 @@ Instead of manual installation, we adopt the **"Infrastructure as Code" (IaC)** 
 *   Initial setup will be "plug-and-play" (reproducible) using **Ansible** and YAML configurations.
 *   Daily management and visualization will be conducted via the **Rancher** interface.
 
-## 5. Thesis Objectives
-With this architecture, you will prove the following (as detailed in [Methodology](METHODOLOGY.md)):
+## 5. Project Objectives
+With this architecture, we aim to demonstrate the following (as detailed in [Methodology](METHODOLOGY.md)):
 1.  **Cost:** Reducing TCO (Total Cost of Ownership) by zeroing out licensing fees.
 2.  **Legal Security:** Preventing data from being subject to US laws (CLOUD Act).
 3.  **Applicability:** Demonstrating that open-source systems meet corporate performance requirements.

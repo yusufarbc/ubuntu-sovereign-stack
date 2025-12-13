@@ -5,10 +5,10 @@ Microsoft has made its stance clear: the future is Azure. This is evidenced by t
 
 > For a detailed analysis of Microsoft's strategy, the deprecation of on-prem tools, and the legal risks of the CLOUD Act, please read our [**Background Analysis: Cloud-First Strategy vs. Data Sovereignty**](docs/BACKGROUND_CLOUD_FIRST.md).
 
-This thesis project proves that an organization can build a **100% On-Premise**, **Enterprise-Grade** infrastructure that ensures data remains physically, legally, and operationally under their sole control—without sacrificing modern capabilities.
+This project demonstrates that an organization can build a **100% On-Premise**, **Enterprise-Grade** infrastructure that ensures data remains physically, legally, and operationally under their sole control—without sacrificing modern capabilities.
 
-## Research Questions
-This architecture serves as a prototype to validate four core questions:
+## Core Objectives
+This architecture serves as a prototype to validate four core requirements:
 1.  **TCO Advantage:** What is the tangible cost benefit of eliminating proprietary licensing (CALs, Subscriptions)?
 2.  **Security & Compliance:** Can Open Source solutions (Wazuh, Authentik, OpenVAS) achieve parity with proprietary enterprise security stacks?
 3.  **Usability & Manageability:** How effectively does the Rancher/Kubernetes abstraction layer modernize on-premise operations?
@@ -73,7 +73,7 @@ To overcome user resistance to Linux, we reject the "one size fits all" approach
 ## Detailed Documentation
 For a navigable index of all research and technical documents, please visit the **[Documentation Directory](docs/)**.
 
-This repository contains a comprehensive documentation suite for the thesis:
+This repository contains a comprehensive documentation suite for the project:
 
 *   **[Background Analysis](docs/BACKGROUND_CLOUD_FIRST.md):** Deep dive into Microsoft's "Cloud-First" strategy and the case for sovereignty.
 *   **[Comparative Analysis](docs/COMPARATIVE_ANALYSIS.md):** Detailed architectural comparison and defense against the Microsoft Ecosystem.

@@ -1,9 +1,9 @@
 # Documentation Index
 
-Welcome to the comprehensive documentation for the **Ubuntu Sovereign Stack** thesis project.
+Welcome to the comprehensive documentation for the **Ubuntu Sovereign Stack** project.
 
 ## Core Documents
-*   **[Thesis Proposal](THESIS_PROPOSAL.md):** The academic foundation, research questions, and scope.
+*   **[Project Proposal](PROJECT_PROPOSAL.md):** The architectural foundation, core objectives, and scope.
 *   **[Vision Statement](VISION.md):** Executive summary of the project goals and architecture.
 *   **[Background Analysis](BACKGROUND_CLOUD_FIRST.md):** Deep dive into the "Cloud-First" problem, Microsoft's strategy, and Data Sovereignty.
 *   **[Comparative Analysis](COMPARATIVE_ANALYSIS.md):** Detailed architectural comparison and defense against the Microsoft Ecosystem.
