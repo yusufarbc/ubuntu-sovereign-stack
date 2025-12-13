@@ -20,10 +20,10 @@
             <a href="../index.html" class="brand">Ubuntu Sovereign Stack</a>
             <ul class="nav-links">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
-                <li><a href="project_proposal.html" class="nav-link">Proposal</a></li>
-                <li><a href="vision.html" class="nav-link">Vision</a></li>
-                <li><a href="architecture.html" class="nav-link">Architecture</a></li>
-                <li><a href="index.html" class="nav-link active">Docs</a></li>
+                <li><a href="project_proposal.html" class="nav-link active">Proposal</a></li>
+                <li><a href="vision.html" class="nav-link ">Vision</a></li>
+                <li><a href="architecture.html" class="nav-link ">Architecture</a></li>
+                <li><a href="index.html" class="nav-link ">Docs</a></li>
             </ul>
             <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn-github" target="_blank">
                 GitHub &rarr;
@@ -33,13 +33,12 @@
 
     <div class="container">
         <div class="docs-content">
-            <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary);">&larr; Back to Index</a>
+            <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
             <h1>Project Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture</h1>
-<p><strong>Title:</strong> Ubuntu-Based Open-Source Enterprise Architecture: An Alternative Model to Microsoft's Cloud-First Approach from a Data Sovereignty Perspective</p>
-<p><strong>Server:</strong> Kubernetes (Rancher)</p>
-<p><strong>IAM/MFA:</strong> Authentik</p>
-<p><strong>Directory/Email:</strong> Samba AD + Zimbra CE</p>
-<p><strong>Client:</strong> Ubuntu LTS and Derivatives</p>
+<p>&gt; *   <strong>Server:</strong> Kubernetes (Rancher)</p>
+<p>&gt; *   <strong>IAM/MFA:</strong> Authentik</p>
+<p>&gt; *   <strong>Directory:</strong> Samba AD + Zimbra CE</p>
+<p>&gt; *   <strong>Client:</strong> Ubuntu LTS and Derivatives</p>
 <h2>Abstract</h2>
 <p>This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM), OpenVAS (vulnerability scanning), and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.</p>
 <h2>1. Introduction</h2>
@@ -74,17 +73,58 @@
 <ul>
 <li>  <em>See <a href="TOOLS.html">Tools &amp; Components</a> for detailed definitions and selection rationale.</em></li>
 </ul>
-<p>| Service Area | Component | Key Features |</p>
-<p>| :--- | :--- | :--- |</p>
-<p>| <strong>OS</strong> | Ubuntu LTS (Server) + Mint/Zorin (Client) | LTS stability, vast package ecosystem, user-friendly desktop. |</p>
-<p>| <strong>Cluster Mgmt</strong> | Kubernetes + Rancher | Multi-cluster GUI, RBAC, Catalog, scaling/backup workflows. |</p>
-<p>| <strong>Directory</strong> | Samba 4 Active Directory | AD-compatible LDAP/Kerberos; supports Windows/Linux clients. |</p>
-<p>| <strong>IAM / SSO</strong> | Authentik | SAML/OIDC/LDAP/RADIUS; MFA (TOTP/WebAuthn); policy engine. |</p>
-<p>| <strong>Email/Collab</strong> | Zimbra CE | External auth with AD; web client; calendar/contacts; on-prem storage. |</p>
-<p>| <strong>SIEM/XDR</strong> | Wazuh | Centralized logging, correlation, compliance reports. |</p>
-<p>| <strong>Vuln Mgmt</strong> | OpenVAS | CVSS-based scanning, risk prioritization. |</p>
-<p>| <strong>Observability</strong> | Prometheus + Grafana | Metric collection, dashboards, alerting. |</p>
-<p>| <strong>IaC</strong> | OpenTofu / Ansible | Infrastructure as Code, reproducible &amp; portable setups. |</p>
+<table>
+<thead><tr>
+<th>Service Area</th>
+<th>Component</th>
+<th>Key Features</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>OS</strong></td>
+<td>Ubuntu LTS (Server) + Mint/Zorin (Client)</td>
+<td>LTS stability, vast package ecosystem, user-friendly desktop.</td>
+</tr>
+<tr>
+<td><strong>Cluster Mgmt</strong></td>
+<td>Kubernetes + Rancher</td>
+<td>Multi-cluster GUI, RBAC, Catalog, scaling/backup workflows.</td>
+</tr>
+<tr>
+<td><strong>Directory</strong></td>
+<td>Samba 4 Active Directory</td>
+<td>AD-compatible LDAP/Kerberos; supports Windows/Linux clients.</td>
+</tr>
+<tr>
+<td><strong>IAM / SSO</strong></td>
+<td>Authentik</td>
+<td>SAML/OIDC/LDAP/RADIUS; MFA (TOTP/WebAuthn); policy engine.</td>
+</tr>
+<tr>
+<td><strong>Email/Collab</strong></td>
+<td>Zimbra CE</td>
+<td>External auth with AD; web client; calendar/contacts; on-prem storage.</td>
+</tr>
+<tr>
+<td><strong>SIEM/XDR</strong></td>
+<td>Wazuh</td>
+<td>Centralized logging, correlation, compliance reports.</td>
+</tr>
+<tr>
+<td><strong>Vuln Mgmt</strong></td>
+<td>OpenVAS</td>
+<td>CVSS-based scanning, risk prioritization.</td>
+</tr>
+<tr>
+<td><strong>Observability</strong></td>
+<td>Prometheus + Grafana</td>
+<td>Metric collection, dashboards, alerting.</td>
+</tr>
+<tr>
+<td><strong>IaC</strong></td>
+<td>OpenTofu / Ansible</td>
+<td>Infrastructure as Code, reproducible &amp; portable setups.</td>
+</tr>
+</tbody></table>
 <h3>4.2 Methodology &amp; Project Management</h3>
 <p>The project follows a strict DevOps and Project Management framework to ensure reproducibility and timely delivery.</p>
 <ul>

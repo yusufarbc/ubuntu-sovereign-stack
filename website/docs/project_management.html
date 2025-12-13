@@ -20,9 +20,9 @@
             <a href="../index.html" class="brand">Ubuntu Sovereign Stack</a>
             <ul class="nav-links">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
-                <li><a href="project_proposal.html" class="nav-link">Proposal</a></li>
-                <li><a href="vision.html" class="nav-link">Vision</a></li>
-                <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+                <li><a href="project_proposal.html" class="nav-link ">Proposal</a></li>
+                <li><a href="vision.html" class="nav-link ">Vision</a></li>
+                <li><a href="architecture.html" class="nav-link ">Architecture</a></li>
                 <li><a href="index.html" class="nav-link active">Docs</a></li>
             </ul>
             <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn-github" target="_blank">
@@ -33,7 +33,7 @@
 
     <div class="container">
         <div class="docs-content">
-            <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary);">&larr; Back to Index</a>
+            <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
             <h1>Project Management &amp; Deliverables</h1>
 <h2>Work Breakdown Structure (WBS) &amp; Timeline</h2>
 <h3>Month 1-2: Foundation &amp; Requirements</h3>
@@ -61,12 +61,33 @@
 <li>  <strong>Milestone:</strong> Thesis Defense.</li>
 </ul>
 <h2>Risk Management</h2>
-<p>| Risk | Impact | Mitigation Strategy |</p>
-<p>| :--- | :--- | :--- |</p>
-<p>| <strong>User Resistance</strong> | High | Use familiar UIs (Linux Mint); Provide robust training; Highlight privacy benefits. |</p>
-<p>| <strong>Legacy App Incompatibility</strong> | Medium | Maintain a small VDI pool for indispensable Windows apps; Aggressively move to Web-based alternatives. |</p>
-<p>| <strong>Operational Complexity</strong> | Medium | Use <strong>Rancher</strong> to simplify K8s management; Document everything in "Runbooks". |</p>
-<p>| <strong>Data Loss</strong> | Critical | <strong>3-2-1 Backup Rule</strong>: Local Snapshots (Longhorn) + NAS Backup + Offline Replica. |</p>
+<table>
+<thead><tr>
+<th>Risk</th>
+<th>Impact</th>
+<th>Mitigation Strategy</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>User Resistance</strong></td>
+<td>High</td>
+<td>Use familiar UIs (Linux Mint); Provide robust training; Highlight privacy benefits.</td>
+</tr>
+<tr>
+<td><strong>Legacy App Incompatibility</strong></td>
+<td>Medium</td>
+<td>Maintain a small VDI pool for indispensable Windows apps; Aggressively move to Web-based alternatives.</td>
+</tr>
+<tr>
+<td><strong>Operational Complexity</strong></td>
+<td>Medium</td>
+<td>Use <strong>Rancher</strong> to simplify K8s management; Document everything in "Runbooks".</td>
+</tr>
+<tr>
+<td><strong>Data Loss</strong></td>
+<td>Critical</td>
+<td><strong>3-2-1 Backup Rule</strong>: Local Snapshots (Longhorn) + NAS Backup + Offline Replica.</td>
+</tr>
+</tbody></table>
 <h2>Deliverables</h2>
 <p>1.  <strong>Working Prototype:</strong> A fully functional 3-node Kubernetes cluster running the Sovereign Stack.</p>
 <p>2.  <strong>Documentation Suite:</strong></p>

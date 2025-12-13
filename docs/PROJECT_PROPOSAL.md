@@ -1,11 +1,9 @@
 # Project Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture
 
-**Title:** Ubuntu-Based Open-Source Enterprise Architecture: An Alternative Model to Microsoft's Cloud-First Approach from a Data Sovereignty Perspective
-
-**Server:** Kubernetes (Rancher)
-**IAM/MFA:** Authentik
-**Directory/Email:** Samba AD + Zimbra CE
-**Client:** Ubuntu LTS and Derivatives
+> *   **Server:** Kubernetes (Rancher)
+> *   **IAM/MFA:** Authentik
+> *   **Directory:** Samba AD + Zimbra CE
+> *   **Client:** Ubuntu LTS and Derivatives
 
 ## Abstract
 This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM), OpenVAS (vulnerability scanning), and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.
