@@ -168,8 +168,9 @@ def parse_inline(text):
     def link_replacer(match):
         label = match.group(1)
         url = match.group(2)
-        if url.endswith('.md'):
-            url = url.replace('.md', '.html')
+        if url.lower().endswith('.md'):
+            # Force lowercase because we generate lowercase filenames
+            url = url.lower().replace('.md', '.html')
         # Remove docs/ prefix if linking to sibling files from within docs/
         url = url.replace('docs/', '') 
         return f'<a href="{url}">{label}</a>'
