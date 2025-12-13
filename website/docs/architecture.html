@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>System Architecture</h1>
+<h2>Overview</h2>
+<p>The proposed architecture is a holistic <strong>On-Premise Sovereign Cloud</strong> built on <strong>Ubuntu Server LTS</strong>. It is designed to replace the traditional Microsoft ecosystem (Windows Server/Hyper-V/Active Directory) with a modern, container-based open-source stack.</p>
+<h2>Physical Layer</h2>
+<p>The foundation consists of <strong>3 Physical Servers</strong> configured as a High-Availability (HA) cluster:</p>
+<ul>
+<li>  <strong>Operating System:</strong> Ubuntu Server 22.04/24.04 LTS.</li>
+<li>  <strong>Configuration:</strong> 1 Control Plane (Master) node, 2 Worker nodes (or 3 HA Master/Worker hybrid nodes for resilience).</li>
+<li>  <strong>Networking:</strong> Private network segmentation behind a physical Firewall (e.g., pfSense/OPNsense) with strict egress rules.</li>
+<li>  <strong>Storage:</strong> Local SSDs aggregated via <strong>Longhorn</strong> for distributed persistent block storage.</li>
+</ul>
+<h2>Orchestration Layer: Kubernetes &amp; Rancher</h2>
+<p>Instead of legacy virtualization, the system uses <strong>Kubernetes (RKE2)</strong> managed by <strong>Rancher</strong>.</p>
+<ul>
+<li>  <strong>RKE2</strong>: Used for its FIPS compliance and secure-by-default configuration.</li>
+<li>  <strong>Rancher:</strong> Provides the "Single Pane of Glass" for lifecycle management, RBAC, and workload visibility.</li>
+<li>  <strong>Runtime:</strong> <strong>Podman</strong> is mandated as the container engine (Daemonless/Rootless) to mitigate security risks associated with the Docker daemon.</li>
+</ul>
+<h2>Logical Architecture &amp; Namespaces</h2>
+<p>Services are logically isolated into Kubernetes Namespaces:</p>
+<h3>1. `infrastructure` Namespace</h3>
+<p>Core identity and directory services.</p>
+<ul>
+<li>  <strong>Samba 4 AD</strong>: The "Source of Truth" for identity. Runs as a StatefulSet with persistent storage for NTDS.</li>
+<li>  <strong>Authentik</strong>: IAM Provider. Syncs with Samba AD via LDAP. Provides SSO (SAML/OIDC) and enforces MFA.</li>
+</ul>
+<h3>2. `collaboration` Namespace</h3>
+<p>Business applications.</p>
+<ul>
+<li>  <strong>Zimbra Collaboration Suite</strong>: Deployment for Email, Calendar, and Contacts.</li>
+<li>  <strong>Data Persistence</strong>: <code>/opt/zimbra</code> mounted to Longhorn volumes.</li>
+<li>  <strong>Security</strong>: Internal ClamAV and SpamAssassin enabled.</li>
+</ul>
+<h3>3. `security` Namespace</h3>
+<p>Security and Intelligence services.</p>
+<ul>
+<li>  <strong>Wazuh Manager</strong>: Central SIEM server receiving logs from all agents.</li>
+<li>  <strong>OpenVAS</strong>: Vulnerability Scanner (Greenbone) for scheduled network scans.</li>
+</ul>
+<h3>4. `monitoring` Namespace</h3>
+<p>Cluster health and observability.</p>
+<ul>
+<li>  <strong>Prometheus</strong>: Scrapes metrics from system nodes, Kubernetes API, and application pods.</li>
+<li>  <strong>Grafana</strong>: Visualizes metrics via accessible dashboards (e.g., <code>grafana.sovereign.lan</code>).</li>
+</ul>
+<h2>Networking &amp; Integration</h2>
+<ul>
+<li>  <strong>Ingress Controller</strong>: NGINX Ingress handles TLS termination and routing (Layer 7).</li>
+<li>  <strong>Load Balancer</strong>: MetalLB provides Layer 2 IP assignment for the Ingress Controller.</li>
+<li>  <strong>DNS Strategy</strong>: Split-DNS configuration where internal services (<code>*.sovereign.lan</code>) resolve to the MetalLB VIP.</li>
+</ul>
+<h2>Backup &amp; Disaster Recovery</h2>
+<ul>
+<li>  <strong>Strategy</strong>: 3-2-1 Rule.</li>
+<li>  <strong>Implementation</strong>:</li>
+<li>  <strong>Longhorn Snapshots</strong>: Instant recovery points for volumes.</li>
+<li>  <strong>Velero</strong>: Backs up Kubernetes manifests to S3-compatible on-prem storage (e.g., MinIO or QNAP NAS).</li>
+<li>  <strong>Physical NAS</strong>: QNAP device receives nightly cold storage dumps.</li>
+</ul>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>

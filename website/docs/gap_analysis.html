@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Analysis - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>Ubuntu Sovereign Stack - Gap Analysis</h1>
+<h2>Current Status</h2>
+<p>We have successfully scaffolded:</p>
+<p>1.  <strong>Core OS &amp; Runtime:</strong> Ubuntu + RKE2 + Podman.</p>
+<p>2.  <strong>Application Layer:</strong> Zimbra, Wazuh, Authentik, Samba.</p>
+<p>3.  <strong>Observability:</strong> Prometheus, Grafana.</p>
+<h2>Critical Gaps for "Enterprise-Grade" Prototype</h2>
+<p>To make this thesis project a <strong>functional</strong> and <strong>defendable</strong> sovereign cloud prototype on <strong>Bare Metal</strong>, the following "System Layer" components are currently missing:</p>
+<h3>1. Persistent Storage (The "State" Problem)</h3>
+<ul>
+<li>  <strong>Missing:</strong> A distributed block storage solution.</li>
+<li>  <strong>Why:</strong> Kubernetes on Bare Metal does not have a default StorageClass (unlike AWS EBS or Azure Disk).</li>
+<li>  <strong>Impact:</strong> StatefulSets (Samba, Zimbra, Postgres, Elasticsearch/Wazuh) will <strong>fail to start</strong> because their <code>VolumeClaims</code> cannot be provisioned.</li>
+<li>  <strong>Solution:</strong> Implement <strong>Longhorn</strong> (Cloud-Native distributed storage, highly recommended for Rancher/RKE2).</li>
+</ul>
+<h3>2. Networking &amp; Load Balancing (The "Access" Problem)</h3>
+<ul>
+<li>  <strong>Missing:</strong> A Layer 2 Load Balancer.</li>
+<li>  <strong>Why:</strong> <code>NodePort</code> is not suitable for production. We need dedicated IPs for services (e.g., Mail, Web).</li>
+<li>  <strong>Impact:</strong> Accessing services will require specifying ports (e.g., <code>server-ip:30443</code>), which breaks the "Enterprise" experience.</li>
+<li>  <strong>Solution:</strong> Implement <strong>MetalLB</strong>.</li>
+</ul>
+<h3>3. Rancher Management Platform</h3>
+<ul>
+<li>  <strong>Missing:</strong> The actual installation of the Rancher UI.</li>
+<li>  <strong>Why:</strong> The Vision specifies "Managed by Rancher". We installed RKE2 (the cluster), but not Rancher (the dashboard).</li>
+<li>  <strong>Solution:</strong> Add a Helm Chart wrapper for <strong>Rancher Manager</strong>.</li>
+</ul>
+<h3>4. Ingress &amp; TLS (The "Security" Problem)</h3>
+<ul>
+<li>  <strong>Missing:</strong> Ingress Controller configuration and Certificate Management.</li>
+<li>  <strong>Why:</strong> Secure HTTPS access is non-negotiable for a security-focused thesis.</li>
+<li>  <strong>Solution:</strong> Configure <strong>Ingress-Nginx</strong> (included in RKE2 but needs config) and add <strong>Cert-Manager</strong> for internal/self-signed certificates.</li>
+</ul>
+<h3>5. Backup &amp; Disaster Recovery (The "Sovereignty" Guarantee)</h3>
+<ul>
+<li>  <strong>Missing:</strong> A backup mechanism.</li>
+<li>  <strong>Why:</strong> True sovereignty implies you can recover your data if hardware fails.</li>
+<li>  <strong>Solution:</strong> Add <strong>Velero</strong> manifests.</li>
+</ul>
+<h2>Recommended Action Plan</h2>
+<p>1.  Create <code>kubernetes/system/</code> directory.</p>
+<p>2.  Add manifests/scripts for:</p>
+<ul>
+<li>  <code>longhorn.yaml</code></li>
+<li>  <code>metallb.yaml</code></li>
+<li>  <code>rancher-install.sh</code> (or Helm values)</li>
+<li>  <code>cert-manager.yaml</code></li>
+</ul>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>

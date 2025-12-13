@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>Tools &amp; Components</h1>
+<h2>Core Components Selection Rationale</h2>
+<h3>Operating System: Ubuntu Server LTS</h3>
+<p><strong>Why:</strong> Reliability and Support.</p>
+<p>Canonical provides 5 years of free security updates for LTS releases. This eliminates the need for frequent <code>dist-upgrades</code> and ensures a stable production environment. It serves as the ubiquitous standard for Linux server deployments.</p>
+<h3>Orchestration: Kubernetes with Rancher</h3>
+<p><strong>Why:</strong> Modern Management &amp; Abstraction.</p>
+<p>While Kubernetes handles the scheduling, <strong>Rancher</strong> provides the management layer that rivals proprietary clouds. It simplifies upgrades, access control, and observability, making the complexity of K8s manageable for typical IT teams.</p>
+<h3>Container Runtime: Podman</h3>
+<p><strong>Why:</strong> Security (Rootless/Daemonless).</p>
+<p>Unlike Docker, which requires a central daemon running as root (a single point of failure and security risk), <strong>Podman</strong> runs containers as independent processes. This "Daemonless" architecture is a critical security requirement for a sovereign stack.</p>
+<h2>Application Stack</h2>
+<h3>Identity: Authentik &amp; Samba 4</h3>
+<ul>
+<li>  <strong>Samba 4 Active Directory</strong>: Chosen for its robust compatibility with the Active Directory protocol. It allows the system to support Windows clients (if necessary) and standard LDAP integrations without Microsoft licensing.</li>
+<li>  <strong>Authentik</strong>: A modern, open-source Identity Provider (IdP). It bridges the legacy world (LDAP) with modern web standards (OIDC/SAML) and enforces policies like <strong>WebAuthn/TOTP MFA</strong>, which Samba cannot do natively on its own.</li>
+</ul>
+<h3>Collaboration: Zimbra Community Edition</h3>
+<p><strong>Why:</strong> Feature Parity with Exchange.</p>
+<p>Zimbra offers a complete suite (Email, Calendar, Contacts, File Sharing) with a mature Web UI. It is one of the few open-source solutions that effectively replaces the full functionality of Microsoft Exchange + Outlook Web App.</p>
+<ul>
+<li>  <strong>Security Integration</strong>: Includes <strong>ClamAV</strong> (Antivirus) and <strong>SpamAssassin</strong> (Antispam) out of the box.</li>
+</ul>
+<h3>Security: Wazuh (SIEM/XDR)</h3>
+<p><strong>Why:</strong> Unified Security Visibility.</p>
+<p>Wazuh serves as the "Digital Immune System". It correlates logs from the OS, Kubernetes, and Applications to detect anomalies (e.g., Brute Force attacks, File Integrity changes). It replaces solutions like Microsoft Sentinel.</p>
+<h3>Vulnerability Management: OpenVAS</h3>
+<p><strong>Why:</strong> Continuous Auditing.</p>
+<p>OpenVAS (Greenbone) provides the "Offensive" perspective, scanning the network for known CVEs and misconfigurations, ensuring the stack remains hardened against new threats.</p>
+<h3>Observability: Prometheus &amp; Grafana</h3>
+<p><strong>Why:</strong> Industry Standard Monitoring.</p>
+<p>Replaces proprietary monitoring tools (like SCOM). Prometheus pulls metrics; Grafana visualizes them. This pair provides deep insight into resource usage (CPU/RAM) and application health.</p>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>

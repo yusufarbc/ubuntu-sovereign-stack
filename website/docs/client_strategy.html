@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Strategy - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>Client Strategy: The "Flexible 10" Model</h1>
+<h2>Philosophy</h2>
+<p>Forcing a single Linux distribution on all users creates friction. To successfully migrate from Windows, we adopt a <strong>Persona-Based</strong> approach, offering the right Ubuntu-based flavor for the right job.</p>
+<h2>Recommended Distributions</h2>
+<h3>For Windows Migrants (The Majority)</h3>
+<p>1.  <strong>Linux Mint (Cinnamon Edition)</strong></p>
+<ul>
+<li>  <strong>Target:</strong> Office Workers, Administrative Staff.</li>
+<li>  <strong>Why:</strong> The Cinnamon desktop perfectly mimics the Windows 7/10 layout (Start Menu, Taskbar, System Tray). It reduces muscle memory friction.</li>
+<li>  <strong>Pre-loaded:</strong> LibreOffice, Firefox, Multimedia codecs.</li>
+</ul>
+<p>2.  <strong>Zorin OS</strong></p>
+<ul>
+<li>  <strong>Target:</strong> Management, Executives.</li>
+<li>  <strong>Why:</strong> Highly polished visuals. Specific layouts can mimic Windows 11 or macOS, offering a premium "Aesthetic" feel that executives often prefer.</li>
+</ul>
+<h3>For Technical Staff</h3>
+<p>3.  <strong>Pop!_OS</strong> (System76)</p>
+<ul>
+<li>  <strong>Target:</strong> Developers, Engineers, R&amp;D.</li>
+<li>  <strong>Why:</strong> Native tiling window management, superior GPU driver handling (NVIDIA), and optimized for workflow speed.</li>
+</ul>
+<p>4.  <strong>KDE Neon / Kubuntu</strong></p>
+<ul>
+<li>  <strong>Target:</strong> Power Users.</li>
+<li>  <strong>Why:</strong> Infinite configurability. KDE Plasma allows users to tweak every aspect of the OS.</li>
+</ul>
+<h3>For Specialized Hardware</h3>
+<p>5.  <strong>Xubuntu / Lubuntu</strong></p>
+<ul>
+<li>  <strong>Target:</strong> Legacy Hardware (Old PCs), Thin Clients.</li>
+<li>  <strong>Why:</strong> XFCE and LXQt are extremely lightweight, extending the lifecycle of hardware that cannot run modern Windows versions (reducing e-waste).</li>
+</ul>
+<p>6.  <strong>elementary OS</strong></p>
+<ul>
+<li>  <strong>Target:</strong> Kiosks, Public Terminals.</li>
+<li>  <strong>Why:</strong> Locked-down, macOS-like interface that is simple and prevents accidental configuration changes.</li>
+</ul>
+<h2>Migration &amp; Training Plan</h2>
+<h3>Phase 1: Assessment &amp; Interoperability</h3>
+<ul>
+<li>  Identify critical legacy Windows-only apps.</li>
+<li>  <strong>Solution Strategy:</strong></li>
+</ul>
+<p>    1.  <strong>Replace:</strong> Find Web/Linux alternative (e.g., Outlook -&gt; Zimbra Web).</p>
+<p>    2.  <strong>Emulate:</strong> Wine/Proton for simple exes.</p>
+<p>    3.  <strong>Virtualize:</strong> VDI or Local VM for strictly required legacy apps.</p>
+<h3>Phase 2: The Pilot</h3>
+<ul>
+<li>  Deploy Linux Mint to a small control group (5-10 users).</li>
+<li>  Provide "Cheat Sheets" (e.g., "Where is My Computer?", "How to Print").</li>
+</ul>
+<h3>Phase 3: Education</h3>
+<ul>
+<li>  Short workshops focusing on file management and browser usage.</li>
+<li>  Emphasis on <strong>Privacy</strong> advantages (No telemetry) to win user buy-in.</li>
+</ul>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>

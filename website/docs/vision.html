@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>Ubuntu Sovereign Stack - Vision Document</h1>
+<h2>1. Core Vision &amp; Problem</h2>
+<p>This project is a rebellion against Microsoft's <strong>"Cloud-First"</strong> strategy (Windows Server 2025/Azure mandates) and the risk of "data sovereignty violation" posed by the <strong>US CLOUD Act</strong>. The goal is to ensure that data remains 100% under the organization's control (On-Premise), not just physically, but also <strong>legally and visibly</strong>.</p>
+<p>&gt; <em>For the full background on this problem, see <a href="BACKGROUND_CLOUD_FIRST.html">Background Analysis</a>.</em></p>
+<h2>2. Technical Architecture (Cloud Native &amp; Open Source)</h2>
+<p>Instead of legacy virtualization, we are establishing a modern, <strong>container-based</strong> structure.</p>
+<ul>
+<li>  <em>See <a href="ARCHITECTURE.html">System Architecture</a> for the full topology.</em></li>
+<li>  <em>See <a href="TOOLS.html">Tools &amp; Components</a> for component details.</em></li>
+</ul>
+<ul>
+<li>  <strong>Server Operating System:</strong> <strong>Ubuntu Server LTS</strong> for stability and 5-year support.</li>
+<li>  <strong>Orchestration:</strong> <strong>Kubernetes</strong> managed by <strong>Rancher</strong> (RKE2) for cluster management.</li>
+<li>  <strong>Container Engine (Critical Distinction):</strong> Mandatory use of <strong>Podman</strong> instead of Docker due to security (daemonless/rootless) advantages.</li>
+<li>  <strong>Identity Management (IAM):</strong> <strong>Samba 4 Active Directory</strong> (Source of Truth) replacing Windows AD, with <strong>Authentik</strong> integration for modern SSO/MFA.</li>
+<li>  <strong>Communication:</strong> <strong>Zimbra Collaboration Suite (OSE)</strong> as an Exchange alternative. Integrated with ClamAV and SpamAssassin for security.</li>
+<li>  <strong>Security &amp; Observability:</strong> <strong>Wazuh</strong> for centralized SIEM, intrusion detection, and vulnerability scanning; <strong>Prometheus</strong> and <strong>Grafana</strong> for metric monitoring.</li>
+</ul>
+<h2>3. Client Strategy</h2>
+<p>To overcome end-user resistance, we adopt a flexible model instead of enforcing a "single Linux type".</p>
+<ul>
+<li>  <em>See <a href="CLIENT_STRATEGY.html">Client Strategy</a> for the "Flexible 10" guide.</em></li>
+</ul>
+<ul>
+<li>  <strong>Linux Mint/Zorin OS</strong> for those coming from Windows.</li>
+<li>  <strong>Pop!_OS</strong> for Engineers.</li>
+<li>  <strong>Xubuntu/Lubuntu</strong> for legacy hardware.</li>
+<li>  Offering a total of <strong>10 different Ubuntu-based distribution</strong> options.</li>
+</ul>
+<h2>4. Management Methodology (DevOps)</h2>
+<p>Instead of manual installation, we adopt the <strong>"Infrastructure as Code" (IaC)</strong> principle.</p>
+<ul>
+<li>  <em>See <a href="PROJECT_MANAGEMENT.html">Project Management</a> for the implementation roadmap.</em></li>
+</ul>
+<ul>
+<li>  Initial setup will be "plug-and-play" (reproducible) using <strong>Ansible</strong> and YAML configurations.</li>
+<li>  Daily management and visualization will be conducted via the <strong>Rancher</strong> interface.</li>
+</ul>
+<h2>5. Project Objectives</h2>
+<p>With this architecture, we aim to demonstrate the following (as detailed in <a href="METHODOLOGY.html">Methodology</a>):</p>
+<p>1.  <strong>Cost:</strong> Reducing TCO (Total Cost of Ownership) by zeroing out licensing fees.</p>
+<p>2.  <strong>Legal Security:</strong> Preventing data from being subject to US laws (CLOUD Act).</p>
+<p>3.  <strong>Applicability:</strong> Demonstrating that open-source systems meet corporate performance requirements.</p>
+<p>In summary; you have designed not just a "Linux server setup", but a fully-fledged <strong>"Sovereign Cloud"</strong> prototype that is legally, economically, and technically grounded.</p>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>

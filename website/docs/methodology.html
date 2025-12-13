@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>Methodology &amp; Evaluation Metrics</h1>
+<p>To prove the validity of the "Ubuntu Sovereign Stack" as a replacement for Microsoft's Cloud-First ecosystem, the thesis employs a multi-dimensional evaluation methodology.</p>
+<h2>1. Total Cost of Ownership (TCO) Analysis</h2>
+<p><strong>Goal:</strong> Quantify the economic advantage of the Open Source model.</p>
+<ul>
+<li>  <strong>Method:</strong> A 5-Year Projection comparison between:</li>
+<li>  <strong>Scenario A (Microsoft):</strong> Windows Server licenses + CALs + Azure Subscriptions + Exchange Enterprise CALs + System Center costs.</li>
+<li>  <strong>Scenario B (Ubuntu Sovereign):</strong> Hardware costs + Electricity + Estimated Engineering hours (OpEx).</li>
+<li>  <strong>Metric:</strong> Net cost savings (CapEx + OpEx) and break-even point analysis.</li>
+</ul>
+<h2>2. Security Assessment</h2>
+<p><strong>Goal:</strong> Prove that "Open Source" does not mean "Less Secure".</p>
+<ul>
+<li>  <strong>Vulnerability Scanning:</strong> Periodic full-stack scans using <strong>OpenVAS</strong>.</li>
+<li>  <em>Metric:</em> Number of Critical/High ongoing vulnerabilities vs. Time to Remediate.</li>
+<li>  <strong>Incident Detection:</strong> Simulation of attacks (e.g., "WannaCry-style" ransomware simulation or Brute Force patterns).</li>
+<li>  <em>Metric:</em> Detection time (MTTD) by <strong>Wazuh</strong> and Response time (MTTR).</li>
+<li>  <strong>Identity Security:</strong> Verification of MFA enforcement.</li>
+<li>  <em>Metric:</em> Testing authenticated access attempts without MFA (Should Fail).</li>
+</ul>
+<h2>3. Usability &amp; Manageability Analysis</h2>
+<p><strong>Goal:</strong> Assess the operational overhead for IT Administrators.</p>
+<ul>
+<li>  <strong>Automation:</strong> Testing the "Infrastructure as Code" maturity.</li>
+<li>  <em>Metric:</em> Time required to rebuild the entire cluster from scratch using Ansible (Reproducibility Test).</li>
+<li>  <strong>Day-2 Operations:</strong> Routine tasks evaluation.</li>
+<li>  <em>Metric:</em> Number of "clicks/steps" to provision a new user in Authentik/Samba vs. Active Directory Users &amp; Computers (ADUC).</li>
+</ul>
+<h2>4. Client Strategy Verification (UX)</h2>
+<p><strong>Goal:</strong> Evaluate end-user adaptability to Linux Desktops.</p>
+<ul>
+<li>  <strong>Pilot Study:</strong> A 1-week structured pilot with non-technical users on <strong>Linux Mint/Zorin OS</strong>.</li>
+<li>  <strong>Qualitative Data:</strong> Semi-structured interviews covering:</li>
+<li>  "Can you perform your daily office tasks (Docs, Email)?"</li>
+<li>  "How does the interface compare to Windows?"</li>
+<li>  <strong>Quantitative Data:</strong> Task completion success rate (e.g., "Connect to Printer", "Open from Network Share").</li>
+</ul>
+<h2>5. Sovereignty Stress Test</h2>
+<p><strong>Goal:</strong> Confirm Data Residency guarantees.</p>
+<ul>
+<li>  <strong>Network Isolation:</strong> Verifying zero telemetry egress.</li>
+<li>  <em>Method:</em> Packet capture (Wireshark) at the firewall level to ensure no unauthorized data (telemetry) leaves the local network to US-based servers (unlike Windows 10/11 default behavior).</li>
+</ul>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>

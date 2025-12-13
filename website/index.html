@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,7 +64,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         /* Architecture Section */
@@ -78,7 +79,7 @@
             background: white;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             border-top: 4px solid var(--ubuntu-orange);
         }
 
@@ -131,6 +132,7 @@
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <header>
@@ -138,6 +140,8 @@
             <h1>Ubuntu Sovereign Stack</h1>
             <p class="hero-subtitle">Open-Source Enterprise Architecture for Data Sovereignty</p>
             <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn">View on GitHub</a>
+            <a href="docs/index.html" class="btn"
+                style="background-color: var(--ubuntu-purple); color: white; margin-left: 1rem;">Documentation</a>
         </div>
     </header>
 
@@ -147,7 +151,8 @@
         <div class="architecture-grid">
             <div class="arch-card">
                 <h3>Infrastructure</h3>
-                <p>3x Physical Nodes running <strong>Ubuntu Server LTS</strong>. Bare-metal performance with zero virtualization overhead.</p>
+                <p>3x Physical Nodes running <strong>Ubuntu Server LTS</strong>. Bare-metal performance with zero
+                    virtualization overhead.</p>
             </div>
             <div class="arch-card">
                 <h3>Orchestration</h3>
@@ -155,7 +160,8 @@
             </div>
             <div class="arch-card">
                 <h3>Runtime</h3>
-                <p><strong>Podman</strong>. A daemonless, rootless container engine strategy. No Docker daemon security risks.</p>
+                <p><strong>Podman</strong>. A daemonless, rootless container engine strategy. No Docker daemon security
+                    risks.</p>
             </div>
         </div>
     </section>
@@ -163,8 +169,9 @@
     <div class="distro-section">
         <section class="container">
             <h2>The "Flexible 10" Client Strategy</h2>
-            <p>One OS does not fit all. We provide a tailored Ubuntu-based distribution for every role in your organization.</p>
-            
+            <p>One OS does not fit all. We provide a tailored Ubuntu-based distribution for every role in your
+                organization.</p>
+
             <div class="distro-grid">
                 <div class="distro-card">
                     <span class="distro-name">Ubuntu Desktop</span>
@@ -215,4 +222,5 @@
     </footer>
 
 </body>
+
 </html>

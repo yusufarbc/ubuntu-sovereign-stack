@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Cloud First - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>Microsoft’s Cloud-First Strategy and Data Privacy</h1>
+<p><strong>Author:</strong> Yusuf Talha ARABACI  </p>
+<p><strong>Date:</strong> Sep 19, 2025</p>
+<h2>Introduction</h2>
+<p>In recent years, Microsoft has clearly adopted a “cloud-first” approach, positioning its products — such as Windows Server, identity management, and others — to integrate closely with the Azure cloud. For example, Microsoft’s documentation emphasizes that <strong>Windows Server 2022</strong> introduces innovations based on the core themes of “security, Azure hybrid integration, and management.” The <strong>Windows Server 2022 Datacenter: Azure Edition</strong> even offers features that “leverage cloud benefits to keep VMs up to date without disruption,” including cloud-oriented innovations such as Hotpatch, SMB over QUIC, and Azure Extended Networking. This demonstrates that Microsoft is prioritizing Azure and cloud integration in both product innovations and management methods.</p>
+<h2>The State of On-Prem Products: Declining and Evolving Tools</h2>
+<p>Microsoft’s strategy is not to immediately phase out on-premises infrastructure entirely but rather to steer it toward Azure-centric hybrid management. However, development has slowed for some classic tools:</p>
+<h3>WSUS (Windows Server Update Services)</h3>
+<p>In September 2024, Microsoft announced that <strong>WSUS had been “deprecated.”</strong> No new feature investments will be made for WSUS, and new feature requests will not be accepted. Existing functionality will be maintained, and the role will continue to exist in Windows Server 2025. However, this move is intended to direct enterprises toward cloud-based patch management solutions like <strong>Windows Autopatch</strong>, <strong>Intune</strong>, and <strong>Azure Update Manager</strong>. In short, WSUS is still usable, but no new innovations should be expected; Microsoft has clearly signaled its strategy to shift update management to cloud tools.</p>
+<h3>Windows Admin Center (WAC)</h3>
+<p>Active development continues for this management tool. For example, the WAC 2410 release in December 2024 included a .NET 8 update, improvements to virtual machine and security tools, and various bug fixes. Additionally, cloud-oriented innovations such as large-scale integration with Azure Arc and Azure Migrate assessments are regularly added. This makes WAC one of the few on-prem tools that continues to receive major updates.</p>
+<h3>Azure Stack / Azure Stack HCI (Azure Local)</h3>
+<p>Formerly known as Azure Stack HCI, now branded as <strong>Azure Local</strong>, this is an infrastructure actively developed for hybrid/on-premises scenarios. The latest version of Azure Local introduces features focused on cloud-based deployment and updates, cloud monitoring, and management via Azure. For instance, the latest release announcement emphasized that “Azure Stack HCI is now part of Azure Local” and that the new version simplifies cloud-based deployment/updates and VM management. Thus, Microsoft is not entirely abandoning on-prem hardware but is positioning this infrastructure as a hybrid platform “unified with Azure.”</p>
+<h2>Identity Management: The Status of On-Prem AD</h2>
+<p>The dominant trend in Microsoft’s identity solutions is similarly cloud-centric. <strong>Azure AD / Microsoft Entra ID</strong> is maturing rapidly as Microsoft’s cloud identity platform. For example, the <strong>Azure AD Graph API</strong> (a legacy identity API) will be fully retired by the end of 2025, with all new identity functionality being delivered through <strong>Microsoft Graph</strong>. This indicates that new applications and integrations are increasingly relying on Azure AD/Entra APIs.</p>
+<p>However, Microsoft is not claiming that on-prem AD will disappear immediately. In fact, future versions of Windows Server (e.g., 2025) include significant improvements for <strong>Active Directory Domain Services (AD DS)</strong>. For instance, Windows Server 2025 features innovations such as optionally increasing the database page size from 8k to 32k (to support more multi-value attributes), new schema updates, LAPS (Local Admin Password Solution) enhancements, and multi-core performance improvements. This shows that on-prem AD remains technically robust. That said, Microsoft explicitly encourages the use of hybrid identity in new solutions: tools like Azure AD Connect and Azure AD Join build bridges between on-prem AD and Azure AD, and the long-term recommendation is to host workloads on Entra ID. In summary, on-prem AD is “not ending immediately,” but most investments are shifting to the cloud-based identity platform.</p>
+<h2>Data Privacy and Data Sovereignty Concerns</h2>
+<p>One of the most questioned aspects of Microsoft’s cloud strategy is <strong>data sovereignty and privacy</strong>. Microsoft commits to protecting customer data, including within the EU. For example, according to Reuters, Microsoft announced that European cloud customers’ data would remain in Europe and be subject to oversight by local teams under European laws. Additional measures include keeping data local and requiring remote access to be approved by European personnel.</p>
+<p>However, legal frameworks complicate these commitments. Due to regulations like the <strong>U.S. CLOUD Act</strong>, Microsoft is obligated to provide data when presented with a legally valid request. In fact, Microsoft France’s General Counsel admitted in a June 2025 inquiry that “if requests from the U.S. are made in the correct form, Microsoft must provide the data.” As reported by <em>Heise</em>, this has raised concerns across Europe, with analysts warning that the CLOUD Act could lead to global data requests. Similarly, <em>The Register</em> stated that “Microsoft must hand over data if a properly formatted request is made.” In other words, Microsoft cannot absolutely guarantee the protection of data stored in the EU against international legal demands.</p>
+<p>To address these concerns, Microsoft is working on new solutions like <strong>Azure Confidential Computing</strong> and initiatives such as “Microsoft for Sovereignty,” which offer advanced encryption and local operation guarantees. Additionally, customer-managed keys (CMK/BYOK) are supported, allowing data to be encrypted with your own keys. These options provide an extra layer of protection, but legal demands still pose systematic, surmountable risks. Even if infrastructure is physically located in Europe, valid court orders from the U.S. and other countries can directly impact data access.</p>
+<p>Microsoft’s “Data Residency” commitment documents also state that data will remain in the customer’s chosen geography: “Customer data will be stored in the selected region, and Microsoft will not move it outside geographic boundaries.” Furthermore, Microsoft states that it will not have “direct, unrestricted access” to data keys or content without the customer’s explicit permission. However, <strong>these policies may be amended in accordance with applicable laws</strong> if a government request arises. In short, geographical location alone does not provide absolute assurance, and organizations must strengthen their own encryption and audit layers.</p>
+<h2>Recommendations for On-Prem-Only Enterprises</h2>
+<p>For organizations that never allow data to leave their premises or rely solely on on-prem infrastructure, adopting a cautious hybrid strategy without completely cutting ties to the cloud is the most sensible approach. Below are some technical, administrative, and legal measures that can be taken:</p>
+<h3>Technical Measures</h3>
+<ul>
+<li>  <strong>Inventory and Comprehensive Mapping</strong>: Identify all your data and applications, including where and how they are used in the cloud. Which data is sensitive? Which can be moved? Use tools like Azure Migrate to analyze your infrastructure and identify cloud integrations.</li>
+<li>  <strong>Azure Local / HCI Solutions</strong>: To reduce on-prem dependency, consider Azure Local (formerly Azure Stack HCI) or supported HCI solutions. These products bring many Azure services to the local environment or enable Azure-centric management, allowing data to remain on-prem while management is unified through Azure.</li>
+<li>  <strong>Customer-Managed Keys (CMK/BYOK)</strong>: Use customer-controlled encryption keys for Azure and Microsoft 365 services. By hosting keys in your own Azure Key Vault or on-prem HSM, you can create an additional control layer that limits Microsoft’s direct access to encrypted data. (Note: Legal requests for access to your keys may still occur, but this creates technical barriers.)</li>
+<li>  <strong>Air-Gapped Solutions</strong>: If data must absolutely never leave the organization, the most secure (though costly) approach is to keep critical data in a completely isolated (air-gapped) environment. This environment would have no internet access or integration with external services.</li>
+<li>  <strong>Hybrid Identity and Management</strong>: Use hybrid solutions like federation (AD FS) or Azure AD Connect for identity management where AD/required applications are needed. For management, prefer tools like Windows Admin Center + System Center or Azure Arc to connect on-prem devices to Azure management endpoints.</li>
+</ul>
+<h3>Contractual and Legal Measures</h3>
+<ul>
+<li>  <strong>Privacy/DPA Agreements</strong>: Review your enterprise agreements (DPA, ToS) with Microsoft. Clarify terms related to data processing, access requests, breach notification timelines, and audit rights.</li>
+<li>  <strong>Sovereign Cloud and Local Partners</strong>: Consider Microsoft’s sovereign cloud offerings (e.g., the restricted cloud for Europe) if needed. Alternatively, explore partnerships with fully local providers or services offering “cloud operator license” options. This can reduce vendor dependency.</li>
+<li>  <strong>Legal Consultation</strong>: Assess the risks posed by regulations like the CLOUD Act and GDPR with legal experts. If necessary, develop defense strategies (court interventions, compliance plans). <em>(Note: The above are not legal advice; consult experts.)</em></li>
+</ul>
+<h3>Operational Steps</h3>
+<p>1.  <strong>Inventory &amp; Risk Classification (30 days)</strong>: Catalog all systems, data, and data flows, and classify them by sensitivity.</p>
+<p>2.  <strong>Sensitive Data Location and Access Policy (60 days)</strong>: Determine where critical data should be stored physically/operationally. If it must remain on-prem, establish necessary access control and isolation policies.</p>
+<p>3.  <strong>Coordination with Microsoft</strong>: Engage your account manager to request options like Customer Key, Sovereign Cloud, or Azure Local. Seek to formalize these requests as written guarantees or contract clauses.</p>
+<p>4.  <strong>WSUS Dependency</strong>: If you rely on WSUS for update management, take this deprecation into account. Plan a transition to alternatives like Microsoft Endpoint Manager / System Center Configuration Manager or Azure Update Manager.</p>
+<h2>Open Source Alternatives for Data Sovereignty</h2>
+<p>Microsoft’s aggressive cloud-first strategy and the data sovereignty concerns raised by the U.S. CLOUD Act have placed many organizations in a serious dilemma. Especially for organizations handling sensitive data that must remain on on-premises infrastructure, Microsoft’s cloud-oriented direction is causing discomfort. The deprecation of WSUS, the evolution of Active Directory toward hybrid architectures, and, most importantly, Microsoft executives admitting that they must provide access to data stored in Europe under U.S. laws are accelerating the search for alternative solutions.</p>
+<p>At this point, <strong>Linux desktop solutions</strong> emerge as a strong alternative, both technically and strategically. Thanks to its open-source nature, Linux offers complete transparency, vendor independence, and cost advantages, making it a serious option for organizations concerned about data sovereignty.</p>
+<h3>Full Control: Linux’s Core Advantage</h3>
+<p>The biggest advantage of Linux desktop in enterprise environments is the full control it provides over your system. The open-source codebase allows you to know exactly what is happening on your system — a level of transparency not possible with closed-source systems. Concerns about hidden telemetry, backdoor risks, or remote access channels are eliminated. Additionally, you can customize every component of the system to meet your organizational needs. While Windows requires operating within rules set by Microsoft, on Linux, you set your own rules. This freedom is particularly valuable for sectors with strict compliance requirements.</p>
+<h3>Data Sovereignty: Your Data Stays Yours</h3>
+<p>With Linux desktop, your data never leaves the organization. Contrary to Microsoft’s cloud-first strategy, all data processing occurs locally. Your systems remain fully functional even without an internet connection. This is an indispensable feature for critical infrastructure operators, financial institutions, and government agencies. Your security team can audit the system from end to end and address vulnerabilities using their own resources. Compliance with standards like GDPR and ISO 27001 becomes easier because you have complete control over data flows.</p>
+<h3>Cost Advantage: Liberate Your Budget</h3>
+<p>One of the most tangible benefits of using Linux is cost savings. By completely eliminating Windows and Office licenses, you can achieve significant budget relief. For organizations with hundreds or thousands of desktop computers, these savings can be substantial. Linux’s ability to run efficiently on older hardware also reduces IT refresh budgets. Instead of being forced into hardware upgrades by Microsoft’s requirements, you can use existing hardware longer. Additionally, maintenance costs decrease thanks to the open-source support ecosystem, and you avoid unexpected costs like sudden license increases or forced updates.</p>
+<h2>Which Linux Solution to Choose?</h2>
+<p>When selecting Linux for enterprise environments, it is critical to choose enterprise-ready distributions. <strong>Red Hat Enterprise Linux (RHEL)</strong> offers professional support and long-term guarantees. For Europe-based organizations, <strong>SUSE Linux Enterprise Desktop</strong> is a strong alternative. <strong>Canonical’s Ubuntu LTS</strong> versions provide a balance ideal for mid-sized organizations with 5-year update guarantees.</p>
+<p>For cost-conscious approaches, free RHEL-compatible alternatives like <strong>CentOS Stream</strong> or <strong>AlmaLinux</strong> are available. These distributions retain enterprise features while eliminating license costs.</p>
+<p>The Linux ecosystem is also mature in terms of management infrastructure. Solutions like <strong>FreeIPA</strong> and <strong>Red Hat Identity Management</strong> provide full alternatives to Active Directory for identity management. Tools like <strong>Ansible</strong> and <strong>Puppet</strong> enable centralized configuration management, while <strong>Fleet Commander</strong> and <strong>Cockpit</strong> offer centralized policy enforcement similar to Windows Group Policy.</p>
+<p>Following Microsoft’s deprecation of WSUS, Linux offers reliable alternatives like <code>dnf-automatic</code> and <code>unattended-upgrades</code> for automatic updates. These tools provide centralized management while giving system administrators full control.</p>
+<h2>Application Support: Linux Is Now Ready</h2>
+<p>Advances in application support on modern Linux desktops are truly impressive. <strong>LibreOffice</strong> now offers near-perfect compatibility with Microsoft Office files. Even complex Excel macros run smoothly. Alternatives like <strong>OnlyOffice</strong> provide full Office compatibility without cloud integration. <strong>Collabora Office</strong>, specifically developed for enterprise environments, stands out with its enterprise-focused features.</p>
+<p>The situation is equally positive for business applications. Since most enterprise applications today are web-based, platform independence is largely achieved. For legacy Windows applications, compatibility layers like <strong>Wine</strong> and <strong>CrossOver</strong> are available. For critical applications, Windows virtual machines can easily be run using VMware or VirtualBox.</p>
+<p>For developers, Linux is already an ideal platform. Professional IDEs like IntelliJ IDEA, Visual Studio Code, and Eclipse are natively supported. Container technologies like Docker and Podman perform better on Linux. Modern DevOps tools such as Git, Jenkins, and Kubernetes all run natively on Linux.</p>
+<h2>Migration Strategy: A Patient, Phased Approach</h2>
+<p>When deciding to migrate to Linux, it is critical not to rush. The most successful migrations start with pilot projects and proceed gradually. Begin by selecting a non-critical department to form a small test group. This group can help identify technical issues and serve as pioneers for other staff.</p>
+<p>Do not neglect user training. Personnel accustomed to Windows will need time to adapt to Linux and LibreOffice. Prepare comprehensive training programs to ease this transition. Provide practical training on basic file management, office application usage, and system updates.</p>
+<p>Attempting to change the entire system at once carries significant risks. Instead, adopt a phased approach. Start with test environments, then move to support units, and finally transition production environments. Keep VM solutions or dual-boot systems ready for critical Windows applications.</p>
+<h2>Challenges You Might Face</h2>
+<p>Encountering some challenges during a Linux migration is normal. The biggest challenge is often <strong>resistance due to user habits</strong>. Personnel who have used Windows for years may need time to adapt to the new interface. This process requires patient management and continuous support.</p>
+<p>If you have <strong>industry-specific Windows-only applications</strong>, you may need to develop alternative solutions. Some specialized software may not run natively on Linux. You can overcome this with Wine, CrossOver, or virtual machine solutions, but some performance loss may occur.</p>
+<p>You may occasionally encounter <strong>driver support issues</strong> with legacy hardware. Older printers, scanners, or specialized industrial equipment may not be fully supported on Linux. In such cases, you may need to review your hardware inventory and find compatible alternatives.</p>
+<p><strong>Exchange and Outlook integration</strong> is another challenge area. You may need to reconfigure your corporate email infrastructure. Email clients like Thunderbird and Evolution support the Exchange protocol, but some advanced features may not work fully.</p>
+<h2>Success Stories: Linux’s Real-World Performance</h2>
+<p>Many large organizations worldwide have successfully completed Linux desktop migrations. The City of Munich’s <strong>LiMux project</strong> is perhaps one of the most famous examples. By using Linux on 15,000 desktop computers, they achieved both cost savings and vendor independence. The <strong>French Gendarmerie</strong> wrote an impressive success story by using Ubuntu on 37,000 computers.</p>
+<p>The <strong>Andalusia region of Spain</strong> enabled young people to become familiar with open-source technologies early by using 220,000 Linux computers in the education sector. In <strong>Russia</strong>, many government agencies switched to Linux due to national security concerns and gained technological independence.</p>
+<p>Examples also exist in <strong>Turkey</strong>. The TÜBİTAK-supported <strong>Pardus project</strong> developed a domestic Linux distribution and conducted pilot deployments in various government agencies. Many universities popularized Linux use in academic environments. Some municipalities and ministries also evaluated Linux desktop through pilot projects.</p>
+<p>The common factor in these success stories is patient planning, comprehensive training, and phased migration strategies. None attempted overnight transformation; all followed long-term strategies.</p>
+<h2>Strategic Independence: Technological Sovereignty</h2>
+<p>The benefits of using Linux desktop are not just technical; they also offer significant strategic advantages. By reducing dependence on foreign software companies, you gain <strong>technological sovereignty</strong>. You are unaffected by Microsoft’s policy changes, sudden price increases, or strategic decisions.</p>
+<p>Free from vendor lock-in, you gain strategic flexibility. You make technology decisions based on your own needs, rather than being constrained by others’ roadmaps. You also enhance local expertise, building organizational knowledge by training staff in open-source technologies.</p>
+<p>Linux also offers important risk reduction advantages. In supply chain attacks, the hidden backdoor risks present in closed-source systems do not exist in Linux. The risks of sudden audits and penalties from vendors like Microsoft are eliminated. You avoid forced upgrades and the operational risks they create.</p>
+<h2>Conclusion and Recommendations</h2>
+<p>Microsoft’s cloud-first strategy points toward a hybrid future for corporate IT infrastructure. While new features and management capabilities are largely Azure-focused, investment in classic on-prem solutions is declining. This situation is forcing organizations to make new decisions, especially regarding data privacy and sovereignty.</p>
+<p>Due to regulations like the CLOUD Act, merely keeping data “physically on-prem” is not sufficient for security. A layered strategy is essential: customer-managed encryption keys, hybrid solutions like Azure Local/Azure Stack, and contractual protections must be used together. This allows organizations to benefit from the cloud’s flexibility while providing stronger assurances for critical data.</p>
+<p>At the same time, Linux desktop solutions are emerging as strong contenders for organizations seeking strategic independence and cost advantages. These open-source platforms offer transparency, auditability, and cost control. Of course, the migration process is not easy; but with proper planning, pilot projects, and phased approaches, success is achievable.</p>
+<p>&gt; <strong>Recommendation:</strong> If data sovereignty is a critical priority for your organization, start evaluating Linux desktop options with a small pilot project. Open-source office applications and modern Linux distributions have now reached a maturity level that can meet most enterprise needs.</p>
+<p>&gt; <strong>In summary:</strong> A hybrid approach that leverages cloud advantages without losing control, combined with open-source alternatives for strategic independence, will be the two fundamental axes shaping the future of enterprises.</p>
+<h2>Sources</h2>
+<p>Information has been gathered from Microsoft Learn and Tech Community documentation, as well as reports from Reuters, Heise, and The Register.</p>
+<ul>
+<li>  <a href="https://learn.microsoft.com/en-us/windows-server/get-started/whats-new-in-windows-server-2022">What’s New in Windows Server 2022 | Microsoft Learn</a></li>
+<li>  <a href="https://techcommunity.microsoft.com/blog/windows-itpro-blog/windows-server-update-services-wsus-deprecation/4250436">Windows Server Update Services (WSUS) deprecation — Windows IT Pro Blog</a></li>
+<li>  <a href="https://learn.microsoft.com/en-us/windows-server/manage/windows-admin-center/support/release-history">Windows Admin Center release history | Microsoft Learn</a></li>
+<li>  <a href="https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2508">What’s new in Azure Local latest release — Azure Local | Microsoft Learn</a></li>
+<li>  <a href="https://learn.microsoft.com/en-us/graph/migrate-azure-ad-graph-overview">Migrate from Azure Active Directory (Azure AD) Graph to Microsoft Graph — Microsoft Graph | Microsoft Learn</a></li>
+<li>  <a href="https://learn.microsoft.com/en-us/windows-server/get-started/whats-new-windows-server-2025">What’s new in Windows Server 2025 | Microsoft Learn</a></li>
+<li>  <a href="https://www.reuters.com/sustainability/boards-policy-regulation/microsoft-lays-out-data-protection-plans-european-cloud-customers-2025-06-16/">Microsoft lays out data protection plans for European cloud customers | Reuters</a></li>
+<li>  <a href="https://www.heise.de/en/news/Not-sovereign-Microsoft-cannot-guarantee-the-security-of-EU-data-10494789.html">Not sovereign: Microsoft cannot guarantee the security of EU data | heise online</a></li>
+<li>  <a href="https://www.theregister.com/2025/07/25/microsoft_admits_it_cannot_guarantee/">Microsoft exec admits it ‘cannot guarantee’ data sovereignty • The Register</a></li>
+<li>  <a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/data-residency">Data Residency in Azure | Microsoft Azure</a></li>
+</ul>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>

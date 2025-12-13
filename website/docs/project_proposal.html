@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Proposal - Ubuntu Sovereign Stack</title>
+    <style>
+        :root {
+            --ubuntu-orange: #E95420;
+            --ubuntu-purple: #772953;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f7f7f7;
+            --link-color: #007bff;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ubuntu-purple), var(--ubuntu-orange));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        h1, h2, h3 { color: var(--ubuntu-purple); }
+        h1 { border-bottom: 2px solid var(--ubuntu-orange); padding-bottom: 0.5rem; }
+        
+        a { color: var(--ubuntu-orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--ubuntu-orange);
+            margin: 0;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th { background-color: var(--bg-light); }
+
+        .nav-back {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="background: transparent; padding: 0;">
+            <a href="../index.html">Ubuntu Sovereign Stack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="nav-back">&larr; Back to Home</a>
+        <h1>Project Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture</h1>
+<p><strong>Title:</strong> Ubuntu-Based Open-Source Enterprise Architecture: An Alternative Model to Microsoft's Cloud-First Approach from a Data Sovereignty Perspective</p>
+<p><strong>Server:</strong> Kubernetes (Rancher)</p>
+<p><strong>IAM/MFA:</strong> Authentik</p>
+<p><strong>Directory/Email:</strong> Samba AD + Zimbra CE</p>
+<p><strong>Client:</strong> Ubuntu LTS and Derivatives</p>
+<h2>Abstract</h2>
+<p>This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM), OpenVAS (vulnerability scanning), and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.</p>
+<h2>1. Introduction</h2>
+<p>Accelerated digitalization in the public and private sectors has made cloud computing platforms attractive; however, it has also brought critical issues such as <strong>data sovereignty</strong>, privacy, and <strong>Total Cost of Ownership (TCO)</strong> to the forefront. Regulations like the <strong>US CLOUD Act</strong> increase the risk of data being subject to foreign legal demands. Specifically within the Microsoft ecosystem, steps such as the Azure-centric evolution of Windows Server 2019–2025 and the deprecation of WSUS are driving organizations towards hybrid/cloud solutions. This project evaluates an open-source, on-premise architecture against these risks using technical and managerial metrics.</p>
+<h2>2. Background – Microsoft’s Cloud-First Strategy vs. On-Prem Trends</h2>
+<ul>
+<li>  <strong>Windows Server 2019:</strong> Focus on sustaining classic on-prem workloads.</li>
+<li>  <strong>Windows Server 2022:</strong> Introduction of Azure Edition, Hotpatch, SMB over QUIC, and Azure Extended Networking – signaling a shift to hybrid/cloud integrations.</li>
+<li>  <strong>Windows Server 2025:</strong> While including AD DS/LAPS improvements, it significantly emphasizes Azure Local/Arc/Entra ID integrations.</li>
+<li>  <strong>WSUS Deprecation:</strong> In 2024, WSUS was deprecated; investment in new features has stopped, and customers are being redirected to Azure Update Manager, Intune, or Autopatch.</li>
+<li>  <strong>Licensing Dynamics:</strong> Core-based licensing and subscription models create long-term budget pressure.</li>
+</ul>
+<p>This trend renders on-premise, open-source alternatives strategic for organizations focused on <strong>sovereignty</strong> and <strong>cost control</strong>.</p>
+<p>&gt; <em>For a deeper dive into these trends, see the <a href="BACKGROUND_CLOUD_FIRST.html">Background Analysis: Cloud-First Strategy vs. Data Sovereignty</a>.</em></p>
+<h2>3. Purpose and Research Questions</h2>
+<p><strong>Purpose:</strong> To design a manageable and reproducible Ubuntu-based open-source enterprise architecture that reduces dependence on cloud providers and strengthens data sovereignty, and to benchmark it against the Microsoft ecosystem.</p>
+<p><strong>Research Questions:</strong></p>
+<p>1.  <strong>TCO Advantage:</strong> What is the cost benefit compared to proprietary licensing?</p>
+<p>2.  <strong>Security/Compliance:</strong> What is the level of security (SSO/MFA/SIEM/Vulnerability) achieved?</p>
+<p>3.  <strong>Usability &amp; Manageability:</strong> How do Rancher/Kubernetes improve the management experience?</p>
+<p>4.  <strong>Data Sovereignty:</strong> How are legal risks regarding data residency reduced?</p>
+<h2>4. Scope and System Architecture</h2>
+<ul>
+<li>  <strong>Server Side:</strong> A Kubernetes cluster consisting of 1 Control Plane (Master) + 2 Worker nodes on 3 physical servers. Lifecycle management, RBAC, and observability via Rancher. All services are container-based; versioned with Helm/Manifests; CI/CD integratable.</li>
+<li>  <em>See <a href="ARCHITECTURE.html">System Architecture</a> for detailed node and network topology.</em></li>
+<li>  <strong>Client Side:</strong> Ubuntu LTS derivatives (Linux Mint, Zorin OS, etc.) selected based on user experience and deployed via phased pilots.</li>
+<li>  <em>See <a href="CLIENT_STRATEGY.html">Client Strategy</a> for the "Flexible 10" model.</em></li>
+<li>  <strong>Network Security:</strong> Physical firewall; network segmentation/VPN; IDS/IPS integration options.</li>
+<li>  <strong>Backup:</strong> Snapshot/versioning on QNAP NAS; adhering to the 3-2-1 rule with periodic recovery drills.</li>
+</ul>
+<h3>4.1 Open Source Components</h3>
+<ul>
+<li>  <em>See <a href="TOOLS.html">Tools &amp; Components</a> for detailed definitions and selection rationale.</em></li>
+</ul>
+<p>| Service Area | Component | Key Features |</p>
+<p>| :--- | :--- | :--- |</p>
+<p>| <strong>OS</strong> | Ubuntu LTS (Server) + Mint/Zorin (Client) | LTS stability, vast package ecosystem, user-friendly desktop. |</p>
+<p>| <strong>Cluster Mgmt</strong> | Kubernetes + Rancher | Multi-cluster GUI, RBAC, Catalog, scaling/backup workflows. |</p>
+<p>| <strong>Directory</strong> | Samba 4 Active Directory | AD-compatible LDAP/Kerberos; supports Windows/Linux clients. |</p>
+<p>| <strong>IAM / SSO</strong> | Authentik | SAML/OIDC/LDAP/RADIUS; MFA (TOTP/WebAuthn); policy engine. |</p>
+<p>| <strong>Email/Collab</strong> | Zimbra CE | External auth with AD; web client; calendar/contacts; on-prem storage. |</p>
+<p>| <strong>SIEM/XDR</strong> | Wazuh | Centralized logging, correlation, compliance reports. |</p>
+<p>| <strong>Vuln Mgmt</strong> | OpenVAS | CVSS-based scanning, risk prioritization. |</p>
+<p>| <strong>Observability</strong> | Prometheus + Grafana | Metric collection, dashboards, alerting. |</p>
+<p>| <strong>IaC</strong> | OpenTofu / Ansible | Infrastructure as Code, reproducible &amp; portable setups. |</p>
+<h3>4.2 Methodology &amp; Project Management</h3>
+<p>The project follows a strict DevOps and Project Management framework to ensure reproducibility and timely delivery.</p>
+<ul>
+<li>  <em>See <a href="METHODOLOGY.html">Methodology &amp; Metrics</a> for the evaluation framework (TCO, Security Tests).</em></li>
+<li>  <em>See <a href="PROJECT_MANAGEMENT.html">Project Management</a> for the timeline, WBS, and risk registry.</em></li>
+</ul>
+    </div>
+
+    <footer>
+        <p>Ubuntu Sovereign Stack &copy; 2025. Project Documentation.</p>
+    </footer>
+
+</body>
+</html>
