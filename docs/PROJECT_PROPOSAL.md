@@ -6,7 +6,7 @@
 > *   **Client:** Ubuntu LTS and Derivatives
 
 ## Abstract
-This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM), OpenVAS (vulnerability scanning), and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.
+This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM) and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.
 
 ## 1. Introduction
 Accelerated digitalization in the public and private sectors has made cloud computing platforms attractive; however, it has also brought critical issues such as **data sovereignty**, privacy, and **Total Cost of Ownership (TCO)** to the forefront. Regulations like the **US CLOUD Act** increase the risk of data being subject to foreign legal demands. Specifically within the Microsoft ecosystem, steps such as the Azure-centric evolution of Windows Server 2019–2025 and the deprecation of WSUS are driving organizations towards hybrid/cloud solutions. This project evaluates an open-source, on-premise architecture against these risks using technical and managerial metrics.
@@ -50,9 +50,9 @@ This trend renders on-premise, open-source alternatives strategic for organizati
 | **IAM / SSO** | Authentik | SAML/OIDC/LDAP/RADIUS; MFA (TOTP/WebAuthn); policy engine. |
 | **Email/Collab** | Zimbra CE | External auth with AD; web client; calendar/contacts; on-prem storage. |
 | **SIEM/XDR** | Wazuh | Centralized logging, correlation, compliance reports. |
-| **Vuln Mgmt** | OpenVAS | CVSS-based scanning, risk prioritization. |
+
 | **Observability** | Prometheus + Grafana | Metric collection, dashboards, alerting. |
-| **IaC** | OpenTofu / Ansible | Infrastructure as Code, reproducible & portable setups. |
+| **IaC** | Ansible | Infrastructure as Code, reproducible & portable setups. |
 
 ### 4.2 Methodology & Project Management
 The project follows a strict DevOps and Project Management framework to ensure reproducibility and timely delivery.

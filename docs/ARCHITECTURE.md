@@ -24,7 +24,7 @@ Services are logically isolated into Kubernetes Namespaces for security and reso
 | :--- | :--- | :--- |
 | `infrastructure` | **Samba 4 AD**<br>**Authentik** | **Core Identity:** AD serves as the "Source of Truth". Authentik syncs via LDAP to provide SSO (SAML/OIDC) and MFA. |
 | `collaboration` | **Zimbra Suite** | **Business Apps:** Email, Calendar, Contacts. Data persists on Longhorn volumes; secured by ClamAV/SpamAssassin. |
-| `security` | **Wazuh Manager**<br>**OpenVAS** | **Defensive Ops:** Central SIEM for log correlation and Vulnerability Scanner for network auditing. |
+| `security` | **Wazuh Manager** | **Defensive Ops:** Central SIEM for log correlation. |
 | `monitoring` | **Prometheus**<br>**Grafana** | **Observability:** Scrapes metrics from nodes/pods and visualizes them via accessible dashboards (e.g., `grafana.sovereign.lan`). |
 
 ## Networking & Integration

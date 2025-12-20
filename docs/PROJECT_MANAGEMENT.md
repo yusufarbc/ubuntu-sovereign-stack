@@ -4,7 +4,7 @@
 
 ### Month 1-2: Foundation & Requirements
 *   **Activity:** Hardware sourcing, Network topology design.
-*   **Output:** `infrastructure/` code complete. OpenTofu/Ansible scripts ready.
+*   **Output:** `infrastructure/` code complete. Ansible scripts ready.
 *   **Milestone:** Cluster Scaffolded.
 
 ### Month 3-4: Core Services Deployment
@@ -14,7 +14,7 @@
 
 ### Month 5: Security & Refinement
 *   **Activity:** Hardening.
-*   **Focus:** Deploying Wazuh Agents, configuring OpenVAS scans, fine-tuning Firewall rules.
+*   **Focus:** Deploying Wazuh Agents, fine-tuning Firewall rules.
 *   **Milestone:** Security Audit Passed.
 
 ### Month 6: Validation & Reporting
@@ -38,6 +38,6 @@
     *   Architecture Diagrams.
 3.  **Analysis Reports:**
     *   TCO Comparative Analysis (Excel/PDF).
-    *   Security Vulnerability Report (OpenVAS Export).
+    *   Security Vulnerability Report.
     *   User Experience Survey Results.
 4.  **Academic Thesis:** The final written document defending the model.

@@ -10,7 +10,7 @@ This project demonstrates that an organization can build a **100% On-Premise**, 
 ## Core Objectives
 This architecture serves as a prototype to validate four core requirements:
 1.  **TCO Advantage:** What is the tangible cost benefit of eliminating proprietary licensing (CALs, Subscriptions)?
-2.  **Security & Compliance:** Can Open Source solutions (Wazuh, Authentik, OpenVAS) achieve parity with proprietary enterprise security stacks?
+2.  **Security & Compliance:** Can Open Source solutions (Wazuh, Authentik) achieve parity with proprietary enterprise security stacks?
 3.  **Usability & Manageability:** How effectively does the Rancher/Kubernetes abstraction layer modernize on-premise operations?
 4.  **Data Sovereignty:** How does this architecture specifically mitigate the legal risks associated with data residency and the US CLOUD Act?
 
@@ -25,7 +25,7 @@ We replace legacy virtualization with a modern, container-centric stack.
 | **Identity (IAM)** | **Samba 4 AD + Authentik** | **Samba 4** serves as the Active Directory Source of Truth. **Authentik** bridges legacy AD with modern SSO/MFA. |
 | **Collaboration** | **Zimbra Suite** | A full replacement for Exchange/O365, secured with **ClamAV** and **SpamAssassin**. |
 | **Security (SIEM)** | **Wazuh** | Centralized SIEM for Intrusion Detection and Log Analysis. |
-| **Vuln Scanner** | **OpenVAS** | **Greenbone Vulnerability Management** system for continuous risk assessment. |
+
 | **Observability** | **Prometheus + Grafana** | Real-time metric collection and visualization. |
 
 ## DevOps Methodology

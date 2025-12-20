@@ -11,7 +11,7 @@
 | **IAM / SSO** | **Authentik** | **Modern Identity:** Bridges LDAP with OIDC/SAML. Enforces **WebAuthn/TOTP MFA** policy system-wide. |
 | **Email / Collab** | **Zimbra CE** | **Exchange Alternative:** Full suite (Email, Calendar, Tasks). Includes ClamAV (Anti-virus) and SpamAssassin. |
 | **SIEM / XDR** | **Wazuh** | **Visibility:** Correlates logs from OS, K8s, and Apps to detect anomalies (Digital Immune System). |
-| **Vulnerability** | **OpenVAS** | **Auditing:** Continuous scanning for known CVEs and misconfigurations. |
+
 | **Observability** | **Prometheus + Grafana** | **Metrics:** Industry standard for resource usage and application health monitoring. |
 
 > **Note:** This selection prioritizes open-source licenses, data sovereignty, and enterprise-grade maturity over "bleeding edge" features.

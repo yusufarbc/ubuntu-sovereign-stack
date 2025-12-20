@@ -11,7 +11,7 @@ To prove the validity of the "Ubuntu Sovereign Stack" as a replacement for Micro
 
 ## 2. Security Assessment
 **Goal:** Prove that "Open Source" does not mean "Less Secure".
-*   **Vulnerability Scanning:** Periodic full-stack scans using **OpenVAS**.
+*   **Vulnerability Scanning:** Periodic full-stack scans.
     *   *Metric:* Number of Critical/High ongoing vulnerabilities vs. Time to Remediate.
 *   **Incident Detection:** Simulation of attacks (e.g., "WannaCry-style" ransomware simulation or Brute Force patterns).
     *   *Metric:* Detection time (MTTD) by **Wazuh** and Response time (MTTR).
