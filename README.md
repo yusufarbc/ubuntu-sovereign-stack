@@ -1,85 +1,55 @@
 # Ubuntu Sovereign Stack
 
-## Background: The "Cloud-First" Imposition
-Microsoft has made its stance clear: the future is Azure. This is evidenced by the deprecation of **WSUS**, the shift to **Azure Update Manager**, and the admission that European data is subject to the **US CLOUD Act**.
+## Abstract
+Enterprise workloads increasingly depend on hyperscale clouds governed by extraterritorial laws (e.g., the U.S. CLOUD Act). Even when data resides in-region, vendor-operated control planes and encryption keys can be compelled for disclosure. The Ubuntu Sovereign Stack is an on-premise, open-source reference architecture that keeps identity, collaboration, and observability fully under organizational custody. It pairs Ubuntu Server LTS with Kubernetes (RKE2) and Rancher for cluster governance, Podman for daemonless containers, Samba 4 + Authentik for identity, Zimbra for mail/collaboration, and Wazuh/Prometheus/Grafana for security and metrics. Client flexibility is preserved via ten Ubuntu-based desktops tuned to user personas, minimizing lock-in while sustaining manageability.
 
-> For a detailed analysis of Microsoft's strategy, the deprecation of on-prem tools, and the legal risks of the CLOUD Act, please read our [**Background Analysis: Cloud-First Strategy vs. Data Sovereignty**](docs/BACKGROUND_CLOUD_FIRST.md).
+## Architecture at a Glance
+| Layer | Choice / Rationale |
+| --- | --- |
+| Server OS | Ubuntu Server LTS (5y support, HWE, broad ecosystem) |
+| Orchestration | Kubernetes (RKE2) managed by Rancher (UI, RBAC, lifecycle) |
+| Container Runtime | Podman (daemonless, rootless; Docker explicitly excluded) |
+| Identity | Samba 4 AD (source of truth) + Authentik (SSO/MFA) |
+| Collaboration | Zimbra CE + ClamAV + SpamAssassin |
+| Security/Observability | Wazuh (SIEM/XDR), Prometheus + Grafana (metrics/dashboards) |
+| Storage/Networking | Longhorn (CSI), MetalLB (L2 LB), Cert-Manager (PKI) |
+| Management | Ansible for provisioning; Rancher for day-2 K8s ops |
+| Client Strategy | 10 Ubuntu-based distros aligned to roles (below) |
 
-This project demonstrates that an organization can build a **100% On-Premise**, **Enterprise-Grade** infrastructure that ensures data remains physically, legally, and operationally under their sole control—without sacrificing modern capabilities.
+### The “Flexible 10” Client Strategy
+1) Ubuntu Desktop (standard) • 2) Linux Mint (office) • 3) Zorin OS (management) • 4) Pop!_OS (engineering) • 5) Kubuntu (power users) • 6) Xubuntu (legacy HW) • 7) Lubuntu (thin) • 8) Ubuntu MATE (traditional) • 9) elementary OS (kiosk/public) • 10) KDE Neon (R&D).
 
-## Core Objectives
-This architecture serves as a prototype to validate four core requirements:
-1.  **TCO Advantage:** What is the tangible cost benefit of eliminating proprietary licensing (CALs, Subscriptions)?
-2.  **Security & Compliance:** Can Open Source solutions (Wazuh, Authentik) achieve parity with proprietary enterprise security stacks?
-3.  **Usability & Manageability:** How effectively does the Rancher/Kubernetes abstraction layer modernize on-premise operations?
-4.  **Data Sovereignty:** How does this architecture specifically mitigate the legal risks associated with data residency and the US CLOUD Act?
+## Quick Start (Provision Ubuntu servers with Ansible)
+Prereqs: Ansible control node with SSH key access; inventory `infrastructure/hosts.ini` defining `[master]` and `[worker]`.
 
-## Technical Architecture (Cloud Native & Open Source)
-We replace legacy virtualization with a modern, container-centric stack.
+```bash
+# Install Ansible deps
+sudo apt update && sudo apt install -y ansible git
 
-| Layer | Component | Implementation |
-| :--- | :--- | :--- |
-| **Server OS** | **Ubuntu Server LTS** | Selected for stability and 5-year support cycles. Runs on bare-metal across 3 physical nodes. |
-| **Orchestration** | **Kubernetes (RKE2)** | FIPS-compliant, secure distribution managed by **Rancher** for centralized cluster operations. |
-| **Runtime** | **Podman** | **Critical Requirement:** A Daemonless and Rootless container engine. Docker is explicitly excluded to eliminate the security risks of a central daemon. |
-| **Identity (IAM)** | **Samba 4 AD + Authentik** | **Samba 4** serves as the Active Directory Source of Truth. **Authentik** bridges legacy AD with modern SSO/MFA. |
-| **Collaboration** | **Zimbra Suite** | A full replacement for Exchange/O365, secured with **ClamAV** and **SpamAssassin**. |
-| **Security (SIEM)** | **Wazuh** | Centralized SIEM for Intrusion Detection and Log Analysis. |
+# Run base provisioning (Podman + RKE2 server on all targets; adjust roles as needed)
+cd infrastructure
+ansible-playbook -i hosts.ini setup-rke2.yml
 
-| **Observability** | **Prometheus + Grafana** | Real-time metric collection and visualization. |
+# After install, copy /etc/rancher/rke2/rke2.yaml from master to your kubeconfig path.
+# Deploy system add-ons: Longhorn, MetalLB, Cert-Manager, Rancher helm chart.
+# Apply application manifests under kubernetes/ (core, apps, monitoring).
+```
 
-## DevOps Methodology
-We reject manual "click-ops" in favor of **Infrastructure as Code (IaC)**:
-*   **Reproducibility:** The initial server provisioning is handled by **Ansible**. The entire stack can be rebuilt from code.
-*   **Management:** Day-2 operations are handled via the **Rancher** UI, providing a "Single Pane of Glass" for the entire cluster.
+## Repository Layout
+- .github/ (CI/CD, issue templates)
+- docs/ (thesis docs, architecture, gap/risk, runbooks)
+- infrastructure/ (Ansible for RKE2/OS prep)
+- kubernetes/
+  - core/ (Samba AD, Authentik, identity services)
+  - apps/ (Zimbra, Wazuh, collaboration/security apps)
+  - monitoring/ (Prometheus, Grafana)
+- website/ (static landing page)
 
-## The "Flexible 10" Client Strategy
-To overcome user resistance to Linux, we reject the "one size fits all" approach. We offer a curated menu of 10 Ubuntu-based distributions tailored to specific user personas:
-
-| Distribution | Target Profile | Rationale |
-| :--- | :--- | :--- |
-| **1. Ubuntu Desktop** | Standard Corporate User | The reference standard; stable, supported, and universally recognized. |
-| **2. Linux Mint** | Office / Admin Staff | Cinnamon DE provides a highly familiar Windows-7/10 like workflow. |
-| **3. Zorin OS** | Management / Execs | Highly polished, aesthetic interface resembling modern Windows/macOS. |
-| **4. Pop!_OS** | R&D / Engineers | Optimized for development, tiling windows, and native GPU support. |
-| **5. Kubuntu** | Power Users | KDE Plasma offers maximum configurability for users needing granular control. |
-| **6. Xubuntu** | Legacy Hardware | Lightweight XFCE desktop to extend the life of older corporate assets. |
-| **7. Lubuntu** | Thin Clients | Extremely lightweight (LXQt) for low-resource endpoints. |
-| **8. Ubuntu MATE** | Traditionalists | GNOME 2 fork for users preferring the classic Linux desktop metaphor. |
-| **9. elementary OS** | Kiosks / Public | macOS-like, restrictive interface perfect for focused, simplified usage. |
-| **10. KDE Neon** | Bleeding Edge / Testing | For evaluating the latest desktop technologies before wider rollout. |
-
-## Quick Start
-### Prerequisites
-*   3x Physical Servers (Ubuntu 22.04/24.04 LTS)
-*   Ansible installed on your control node.
-
-### Provisioning
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/yusufarbc/ubuntu-sovereign-stack.git
-    cd ubuntu-sovereign-stack
-    ```
-
-2.  **Configure Inventory:**
-    Edit `infrastructure/hosts.ini` with your server IP addresses.
-
-3.  **Deploy Infrastructure:**
-    Use Ansible to update systems, install Podman, and deploy RKE2:
-    ```bash
-    ansible-playbook -i infrastructure/hosts.ini infrastructure/setup-rke2.yml
-    ```
-
-## Detailed Documentation
-For a navigable index of all research and technical documents, please visit the **[Documentation Directory](docs/)**.
-
-This repository contains a comprehensive documentation suite for the project:
-
-*   **[Background Analysis](docs/BACKGROUND_CLOUD_FIRST.md):** Deep dive into Microsoft's "Cloud-First" strategy and the case for sovereignty.
-*   **[Comparative Analysis](docs/COMPARATIVE_ANALYSIS.md):** Detailed architectural comparison and defense against the Microsoft Ecosystem.
-*   **[System Architecture](docs/ARCHITECTURE.md):** Detailed breakdown of the 3-Node Cluster, Networking, and Storage layers.
-*   **[Tools & Components](docs/TOOLS.md):** Justification for every component selection (Podman, RKE2, Authentik, etc.).
-*   **[Methodology & Metrics](docs/METHODOLOGY.md):** How we measure TCO, Security, and Usability.
-*   **[Client Strategy](docs/CLIENT_STRATEGY.md):** The "Flexible 10" adoption model for end-users.
-*   **[Project Management](docs/PROJECT_MANAGEMENT.md):** Timeline, WBS, and Risk Registry.
-*   **[Gap Analysis](docs/GAP_ANALYSIS.md):** Initial analysis of missing system components.
+## Key Documentation
+- [QUICKSTART.md](QUICKSTART.md): Local and 3-node lab setup in under 2 hours.
+- [docs/CLUSTER_SETUP_GUIDE.md](docs/CLUSTER_SETUP_GUIDE.md): Production deployment (RKE2, system layer, identity, apps).
+- [docs/DEPLOYMENT_ORDER.md](docs/DEPLOYMENT_ORDER.md): Required manifest sequence and validation checkpoints.
+- [docs/DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md): Post-install validation, troubleshooting, sign-off.
+- [docs/OPERATIONAL_RUNBOOK.md](docs/OPERATIONAL_RUNBOOK.md): Day-2 operations (scaling, maintenance, rotations, restore drills).
+- [docs/SECURITY_HARDENING.md](docs/SECURITY_HARDENING.md): Network policies, RBAC, pod security, image policy, secrets.
+- [AUDIT_REPORT.md](AUDIT_REPORT.md): Gap analysis and remediation summary.

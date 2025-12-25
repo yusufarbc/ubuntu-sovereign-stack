@@ -1,21 +1,17 @@
 ---
-- name: Setup Ubuntu Sovereign Stack Nodes
+- name: Setup RKE2 on Ubuntu LTS nodes
   hosts: all
   become: true
   vars:
     rke2_version: "v1.28.10+rke2r1"
-    
+
   tasks:
     - name: Update apt cache and upgrade packages
       apt:
         update_cache: yes
         upgrade: dist
-      register: apt_result
-      retries: 3
-      delay: 5
-      until: apt_result is success
 
-    - name: Install essential dependencies
+    - name: Install dependencies
       apt:
         name:
           - curl
@@ -23,19 +19,10 @@
           - fail2ban
         state: present
 
-    - name: Install Podman (Daemonless Container Engine)
+    - name: Install Podman (daemonless runtime)
       apt:
         name: podman
         state: present
-
-    - name: Verify Podman installation
-      command: podman --version
-      register: podman_version
-      changed_when: false
-
-    - name: Print Podman version
-      debug:
-        msg: "Podman installed: {{ podman_version.stdout }}"
 
     - name: Download RKE2 install script
       get_url:
@@ -47,26 +34,26 @@
       shell: INSTALL_RKE2_VERSION={{ rke2_version }} sh /tmp/install_rke2.sh
       environment:
         INSTALL_RKE2_TYPE: server
-        
-    - name: Enable and start RKE2-server service
+
+    - name: Enable and start RKE2 server
       systemd:
         name: rke2-server
         state: started
         enabled: yes
 
-    - name: Add RKE2 bin to path
+    - name: Add RKE2 bin to PATH
       lineinfile:
         path: /etc/profile.d/rke2.sh
         line: 'export PATH=$PATH:/var/lib/rancher/rke2/bin'
         create: yes
 
-    - name: Symlink kubectl for ease of use
+    - name: Symlink kubectl
       file:
         src: /var/lib/rancher/rke2/bin/kubectl
         dest: /usr/local/bin/kubectl
         state: link
 
-    - name: Symlink crictl for debugging
+    - name: Symlink crictl
       file:
         src: /var/lib/rancher/rke2/bin/crictl
         dest: /usr/local/bin/crictl

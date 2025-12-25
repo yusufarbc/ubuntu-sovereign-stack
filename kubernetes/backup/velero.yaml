@@ -1,0 +1,119 @@
+# Apply Velero CRDs first (helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts && helm install velero vmware-tanzu/velero ...)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: velero
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloud-credentials
+  namespace: velero
+stringData:
+  cloud: |
+    [default]
+    aws_access_key_id=minioadmin
+    aws_secret_access_key=minioadmin
+---
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  provider: aws
+  objectStorage:
+    bucket: backup-uss
+  config:
+    region: us-east-1
+    s3ForcePathStyle: "true"
+    s3Url: http://minio.backup.svc:9000
+---
+apiVersion: velero.io/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: longhorn
+  namespace: velero
+spec:
+  provider: aws
+  config:
+    region: us-east-1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velero
+  namespace: velero
+  labels:
+    component: velero
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: velero
+  template:
+    metadata:
+      labels:
+        component: velero
+    spec:
+      serviceAccountName: velero
+      containers:
+        - name: velero
+          image: velero/velero:v1.13.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - /velero
+          args:
+            - server
+            - --uploader-type=kopia
+            - --features=EnableCSI
+          env:
+            - name: AWS_SHARED_CREDENTIALS_FILE
+              value: /credentials/cloud
+            - name: AWS_REGION
+              value: us-east-1
+          volumeMounts:
+            - name: plugins
+              mountPath: /plugins
+            - name: cloud-credentials
+              mountPath: /credentials
+              readOnly: true
+      volumes:
+        - name: plugins
+          emptyDir: {}
+        - name: cloud-credentials
+          secret:
+            secretName: cloud-credentials
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: velero
+subjects:
+  - kind: ServiceAccount
+    name: velero
+    namespace: velero
+roleRef:
+  kind: ClusterRole
+  name: velero
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: velero
+  namespace: velero
+---
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-default
+  namespace: velero
+spec:
+  schedule: "0 2 * * *"
+  template:
+    ttl: 720h
+    includedNamespaces:
+      - "*"
+    storageLocation: default
+    snapshotVolumes: true

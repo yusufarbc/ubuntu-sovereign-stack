@@ -23,9 +23,10 @@
             <ul class="nav-links">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
                 <li><a href="project_proposal.html" class="nav-link active">Proposal</a></li>
-                <li><a href="vision.html" class="nav-link ">Vision</a></li>
-                <li><a href="architecture.html" class="nav-link ">Architecture</a></li>
-                <li><a href="index.html" class="nav-link ">Docs</a></li>
+                <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="background_cloud_first.html" class="nav-link">Background</a></li>
+                <li><a href="comparative_analysis.html" class="nav-link">Comparative</a></li>
             </ul>
             <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn-github" target="_blank">
                 GitHub &rarr;
@@ -33,103 +34,96 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="docs-content">
-            <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
-            <h1>Project Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture</h1>
-<p>&gt; *   <strong>Server:</strong> Kubernetes (Rancher)</p>
-<p>&gt; *   <strong>IAM/MFA:</strong> Authentik</p>
-<p>&gt; *   <strong>Directory:</strong> Samba AD + Zimbra CE</p>
-<p>&gt; *   <strong>Client:</strong> Ubuntu LTS and Derivatives</p>
-<h2>Abstract</h2>
-<p>This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM) and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.</p>
-<h2>1. Introduction</h2>
-<p>Accelerated digitalization in the public and private sectors has made cloud computing platforms attractive; however, it has also brought critical issues such as <strong>data sovereignty</strong>, privacy, and <strong>Total Cost of Ownership (TCO)</strong> to the forefront. Regulations like the <strong>US CLOUD Act</strong> increase the risk of data being subject to foreign legal demands. Specifically within the Microsoft ecosystem, steps such as the Azure-centric evolution of Windows Server 2019–2025 and the deprecation of WSUS are driving organizations towards hybrid/cloud solutions. This project evaluates an open-source, on-premise architecture against these risks using technical and managerial metrics.</p>
-<h2>2. Background – Microsoft’s Cloud-First Strategy vs. On-Prem Trends</h2>
-<ul>
-<li>  <strong>Windows Server 2019:</strong> Focus on sustaining classic on-prem workloads.</li>
-<li>  <strong>Windows Server 2022:</strong> Introduction of Azure Edition, Hotpatch, SMB over QUIC, and Azure Extended Networking – signaling a shift to hybrid/cloud integrations.</li>
-<li>  <strong>Windows Server 2025:</strong> While including AD DS/LAPS improvements, it significantly emphasizes Azure Local/Arc/Entra ID integrations.</li>
-<li>  <strong>WSUS Deprecation:</strong> In 2024, WSUS was deprecated; investment in new features has stopped, and customers are being redirected to Azure Update Manager, Intune, or Autopatch.</li>
-<li>  <strong>Licensing Dynamics:</strong> Core-based licensing and subscription models create long-term budget pressure.</li>
-</ul>
-<p>This trend renders on-premise, open-source alternatives strategic for organizations focused on <strong>sovereignty</strong> and <strong>cost control</strong>.</p>
-<p>&gt; <em>For a deeper dive into these trends, see the <a href="background_cloud_first.html">Background Analysis: Cloud-First Strategy vs. Data Sovereignty</a>.</em></p>
-<h2>3. Purpose and Research Questions</h2>
-<p><strong>Purpose:</strong> To design a manageable and reproducible Ubuntu-based open-source enterprise architecture that reduces dependence on cloud providers and strengthens data sovereignty, and to benchmark it against the Microsoft ecosystem.</p>
-<p><strong>Research Questions:</strong></p>
-<p>1.  <strong>TCO Advantage:</strong> What is the cost benefit compared to proprietary licensing?</p>
-<p>2.  <strong>Security/Compliance:</strong> What is the level of security (SSO/MFA/SIEM/Vulnerability) achieved?</p>
-<p>3.  <strong>Usability &amp; Manageability:</strong> How do Rancher/Kubernetes improve the management experience?</p>
-<p>4.  <strong>Data Sovereignty:</strong> How are legal risks regarding data residency reduced?</p>
-<h2>4. Scope and System Architecture</h2>
-<ul>
-<li>  <strong>Server Side:</strong> A Kubernetes cluster consisting of 1 Control Plane (Master) + 2 Worker nodes on 3 physical servers. Lifecycle management, RBAC, and observability via Rancher. All services are container-based; versioned with Helm/Manifests; CI/CD integratable.</li>
-<li>  <em>See <a href="architecture.html">System Architecture</a> for detailed node and network topology.</em></li>
-<li>  <strong>Client Side:</strong> Ubuntu LTS derivatives (Linux Mint, Zorin OS, etc.) selected based on user experience and deployed via phased pilots.</li>
-<li>  <em>See <a href="client_strategy.html">Client Strategy</a> for the "Flexible 10" model.</em></li>
-<li>  <strong>Network Security:</strong> Physical firewall; network segmentation/VPN; IDS/IPS integration options.</li>
-<li>  <strong>Backup:</strong> Snapshot/versioning on QNAP NAS; adhering to the 3-2-1 rule with periodic recovery drills.</li>
-</ul>
-<h3>4.1 Open Source Components</h3>
-<ul>
-<li>  <em>See <a href="tools.html">Tools &amp; Components</a> for detailed definitions and selection rationale.</em></li>
-</ul>
-<table>
-<thead><tr>
-<th>Service Area</th>
-<th>Component</th>
-<th>Key Features</th>
-</tr></thead><tbody>
-<tr>
-<td><strong>OS</strong></td>
-<td>Ubuntu LTS (Server) + Mint/Zorin (Client)</td>
-<td>LTS stability, vast package ecosystem, user-friendly desktop.</td>
-</tr>
-<tr>
-<td><strong>Cluster Mgmt</strong></td>
-<td>Kubernetes + Rancher</td>
-<td>Multi-cluster GUI, RBAC, Catalog, scaling/backup workflows.</td>
-</tr>
-<tr>
-<td><strong>Directory</strong></td>
-<td>Samba 4 Active Directory</td>
-<td>AD-compatible LDAP/Kerberos; supports Windows/Linux clients.</td>
-</tr>
-<tr>
-<td><strong>IAM / SSO</strong></td>
-<td>Authentik</td>
-<td>SAML/OIDC/LDAP/RADIUS; MFA (TOTP/WebAuthn); policy engine.</td>
-</tr>
-<tr>
-<td><strong>Email/Collab</strong></td>
-<td>Zimbra CE</td>
-<td>External auth with AD; web client; calendar/contacts; on-prem storage.</td>
-</tr>
-<tr>
-<td><strong>SIEM/XDR</strong></td>
-<td>Wazuh</td>
-<td>Centralized logging, correlation, compliance reports.</td>
-</tr>
-</tbody></table>
-<table>
-<thead><tr>
-<th><strong>Observability</strong></th>
-<th>Prometheus + Grafana</th>
-<th>Metric collection, dashboards, alerting.</th>
-</tr></thead><tbody>
-<tr>
-<td><strong>IaC</strong></td>
-<td>Ansible</td>
-<td>Infrastructure as Code, reproducible &amp; portable setups.</td>
-</tr>
-</tbody></table>
-<h3>4.2 Methodology &amp; Project Management</h3>
-<p>The project follows a strict DevOps and Project Management framework to ensure reproducibility and timely delivery.</p>
-<ul>
-<li>  <em>See <a href="methodology.html">Methodology &amp; Metrics</a> for the evaluation framework (TCO, Security Tests).</em></li>
-<li>  <em>See <a href="project_management.html">Project Management</a> for the timeline, WBS, and risk registry.</em></li>
-</ul>
+        <div class="container">
+                <div class="docs-content">
+                        <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
+                        <h1>Project Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture</h1>
+                        <p>&gt; *   <strong>Server:</strong> Kubernetes (Rancher)</p>
+                        <p>&gt; *   <strong>IAM/MFA:</strong> Authentik</p>
+                        <p>&gt; *   <strong>Directory:</strong> Samba AD + Zimbra CE</p>
+                        <p>&gt; *   <strong>Client:</strong> Ubuntu LTS and Derivatives</p>
+
+                        <h2>Abstract</h2>
+                        <p>This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM) and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.</p>
+
+                        <h2>Vision &amp; Problem Statement</h2>
+                        <p>Cloud-first mandates and the U.S. CLOUD Act create extraterritorial exposure even when data is hosted in-region. The vision is an on-prem, open-source stack where compute, identity, keys, and backups remain under the organization’s legal and operational control, avoiding vendor-operated control planes. <em>See <a href="background_cloud_first.html">Background Analysis</a> for legal/strategic context.</em></p>
+
+                        <h2>1. Introduction</h2>
+                        <p>Accelerated digitalization in the public and private sectors has made cloud computing platforms attractive; however, it has also brought critical issues such as <strong>data sovereignty</strong>, privacy, and <strong>Total Cost of Ownership (TCO)</strong> to the forefront. Regulations like the <strong>US CLOUD Act</strong> increase the risk of data being subject to foreign legal demands. Specifically within the Microsoft ecosystem, steps such as the Azure-centric evolution of Windows Server 2019–2025 and the deprecation of WSUS are driving organizations towards hybrid/cloud solutions. This project evaluates an open-source, on-premise architecture against these risks using technical and managerial metrics.</p>
+
+                        <h2>2. Background – Microsoft’s Cloud-First Strategy vs. On-Prem Trends</h2>
+                        <ul>
+                            <li><strong>Windows Server 2019:</strong> Focus on sustaining classic on-prem workloads.</li>
+                            <li><strong>Windows Server 2022:</strong> Azure Edition, Hotpatch, SMB over QUIC, Azure Extended Networking.</li>
+                            <li><strong>Windows Server 2025:</strong> Emphasis on Azure Local/Arc/Entra ID integrations.</li>
+                            <li><strong>WSUS Deprecation:</strong> 2024 deprecation; push to Azure Update Manager/Intune/Autopatch.</li>
+                            <li><strong>Licensing Dynamics:</strong> Core-based licensing and subscriptions increase long-term cost pressure.</li>
+                        </ul>
+                        <p><em>See <a href="background_cloud_first.html">Background Analysis</a> for details.</em></p>
+
+                        <h2>3. Purpose and Research Questions</h2>
+                        <p><strong>Purpose:</strong> Design a manageable, reproducible Ubuntu-based open-source enterprise architecture that reduces dependence on cloud providers and strengthens data sovereignty; benchmark against the Microsoft ecosystem.</p>
+                        <p><strong>Research Questions:</strong><br>
+                            1) TCO advantage vs proprietary licensing<br>
+                            2) Security/Compliance (SSO/MFA/SIEM/Vuln)<br>
+                            3) Usability &amp; Manageability (Rancher/K8s experience)<br>
+                            4) Data Sovereignty (reducing CLOUD Act exposure)
+                        </p>
+
+                        <h2>4. Scope and System Architecture</h2>
+                        <ul>
+                            <li><strong>Server Side:</strong> 1× control plane + 2× worker (Ubuntu Server LTS) running RKE2; Rancher for lifecycle, RBAC, observability. Helm/manifests; CI/CD-ready. <em>See <a href="architecture.html">System Architecture</a> for topology.</em></li>
+                            <li><strong>Runtime:</strong> Podman-only (daemonless/rootless); Docker explicitly excluded.</li>
+                            <li><strong>Storage/Network/PKI:</strong> Longhorn (CSI) for PVCs; MetalLB (L2) for service IPs; Cert-Manager for internal PKI.</li>
+                            <li><strong>Backup:</strong> Velero + MinIO (S3-compatible) for cluster and volume protection; CSI/kopia snapshots; periodic recovery drills.</li>
+                            <li><strong>Client Side:</strong> Ubuntu LTS derivatives (Linux Mint, Zorin OS, etc.) via phased pilots. <em>See <a href="client_strategy.html">Client Strategy</a> for the “Flexible 10”.</em></li>
+                            <li><strong>Network Security:</strong> Physical firewall; segmentation/VPN; IDS/IPS options.</li>
+                        </ul>
+
+                        <h3>4.1 Open Source Components</h3>
+                        <ul><li><em>See <a href="tools.html">Tools &amp; Components</a> for detailed definitions and selection rationale.</em></li></ul>
+                        <table>
+                            <thead><tr><th>Service Area</th><th>Component</th><th>Key Features</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>OS</strong></td><td>Ubuntu LTS (Server) + Mint/Zorin (Client)</td><td>LTS stability, broad ecosystem, user-friendly desktop.</td></tr>
+                                <tr><td><strong>Cluster Mgmt</strong></td><td>Kubernetes + Rancher</td><td>Multi-cluster GUI, RBAC, catalog, upgrade workflows.</td></tr>
+                                <tr><td><strong>Directory</strong></td><td>Samba 4 Active Directory</td><td>AD-compatible LDAP/Kerberos; Windows/Linux clients.</td></tr>
+                                <tr><td><strong>IAM / SSO</strong></td><td>Authentik</td><td>SAML/OIDC/LDAP/RADIUS; MFA (TOTP/WebAuthn); policy engine.</td></tr>
+                                <tr><td><strong>Email/Collab</strong></td><td>Zimbra CE</td><td>External auth with AD; web client; calendar/contacts; on-prem storage.</td></tr>
+                                <tr><td><strong>SIEM/XDR</strong></td><td>Wazuh</td><td>Centralized logging, correlation, compliance reports.</td></tr>
+                                <tr><td><strong>Observability</strong></td><td>Prometheus + Grafana</td><td>Metric collection, dashboards, alerting.</td></tr>
+                                <tr><td><strong>Storage</strong></td><td>Longhorn (CSI)</td><td>Distributed block storage with snapshots.</td></tr>
+                                <tr><td><strong>Load Balancing</strong></td><td>MetalLB (L2)</td><td>Service IPs on bare-metal via ARP/NDP.</td></tr>
+                                <tr><td><strong>PKI</strong></td><td>Cert-Manager</td><td>Automated internal certificates.</td></tr>
+                                <tr><td><strong>Backup</strong></td><td>Velero + MinIO (S3)</td><td>Cluster + PVC backups with CSI/kopia.</td></tr>
+                                <tr><td><strong>IaC</strong></td><td>Ansible</td><td>Infrastructure as Code; reproducible &amp; portable setups.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>4.2 Methodology &amp; Project Management</h3>
+                        <p>The project follows a strict DevOps and PM framework to ensure reproducibility and timely delivery.</p>
+                        <ul>
+                            <li><em>See <a href="methodology.html">Methodology &amp; Metrics</a> for the evaluation framework (TCO, Security Tests).</em></li>
+                            <li><em>See <a href="project_management.html">Project Management</a> for the timeline, WBS, and risk registry.</em></li>
+                        </ul>
+
+                        <h2>5. Client Strategy (“Flexible 10”)</h2>
+                        <p>Persona-based desktop catalog: Ubuntu Desktop (baseline), Linux Mint/Zorin (Windows converts), Pop!_OS (engineers), Kubuntu (power users), Xubuntu/Lubuntu (legacy/thin), Ubuntu MATE (traditional), elementary OS (kiosk/public), KDE Neon (R&amp;D). <em>See <a href="client_strategy.html">Client Strategy</a> for details.</em></p>
+
+                        <h2>6. Operating Model (IaC + GUI)</h2>
+                        <ul>
+                            <li>Provisioning/rebuilds via Ansible (repeatable, testable).</li>
+                            <li>Day-2 ops via Rancher UI plus GitOps-friendly manifests and Helm charts.</li>
+                        </ul>
+
+                        <h2>7. Objectives &amp; Measures</h2>
+                        <ul>
+                            <li><strong>TCO:</strong> Avoid CALs/O365/Azure licensing; quantify infra + ops cost.</li>
+                            <li><strong>Legal Security:</strong> Keep control planes, keys, and backups on-prem to avoid CLOUD Act reach.</li>
+                            <li><strong>Usability/Manageability:</strong> Compare Rancher/K8s ops to Azure Portal experience.</li>
+                            <li><strong>Reproducibility:</strong> Time-to-rebuild via Ansible + Velero restores.</li>
+                        </ul>
         </div>
     </div>
 

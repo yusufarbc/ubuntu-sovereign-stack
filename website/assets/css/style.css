@@ -284,6 +284,10 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.grid-5 {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
 /* --- Cards --- */
 .card {
     background: var(--bg-surface);

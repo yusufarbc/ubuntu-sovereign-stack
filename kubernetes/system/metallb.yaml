@@ -14,6 +14,8 @@ metadata:
   name: config
 data:
   config: |
+    # Apply MetalLB core manifests (helm chart or https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml)
+    # before using this address pool.
     address-pools:
     - name: default
       protocol: layer2

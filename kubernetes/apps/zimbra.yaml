@@ -56,7 +56,7 @@ spec:
               mountPath: /opt/zimbra
   volumeClaimTemplates:
     - metadata:
-      name: zimbra-data
+        name: zimbra-data
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:

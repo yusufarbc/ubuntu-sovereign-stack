@@ -22,10 +22,11 @@
             <a href="../index.html" class="brand">Ubuntu Sovereign Stack</a>
             <ul class="nav-links">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
-                <li><a href="project_proposal.html" class="nav-link ">Proposal</a></li>
-                <li><a href="vision.html" class="nav-link ">Vision</a></li>
-                <li><a href="architecture.html" class="nav-link ">Architecture</a></li>
-                <li><a href="index.html" class="nav-link active">Docs</a></li>
+                <li><a href="project_proposal.html" class="nav-link">Proposal</a></li>
+                <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+                <li><a href="tools.html" class="nav-link active">Tools</a></li>
+                <li><a href="background_cloud_first.html" class="nav-link">Background</a></li>
+                <li><a href="comparative_analysis.html" class="nav-link">Comparative</a></li>
             </ul>
             <a href="https://github.com/yusufarbc/ubuntu-sovereign-stack" class="btn-github" target="_blank">
                 GitHub &rarr;
@@ -35,59 +36,76 @@
 
     <div class="container">
         <div class="docs-content">
-            <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
-            <h1>Tools &amp; Components</h1>
-<h2>Core Components Selection Rationale</h2>
-<table>
-<thead><tr>
-<th>Category</th>
-<th>Component</th>
-<th>Key Features &amp; Rationale</th>
-</tr></thead><tbody>
-<tr>
-<td><strong>Operating System</strong></td>
-<td><strong>Ubuntu Server LTS</strong></td>
-<td><strong>Reliability:</strong> 5 years of free security updates. Ubiquitous standard for Linux server deployments.</td>
-</tr>
-<tr>
-<td><strong>Orchestration</strong></td>
-<td><strong>Kubernetes (RKE2)</strong></td>
-<td><strong>Modern Management:</strong> Managed by <strong>Rancher</strong> to rival proprietary clouds. Simplifies upgrades and access control.</td>
-</tr>
-<tr>
-<td><strong>Runtime</strong></td>
-<td><strong>Podman</strong></td>
-<td><strong>Security:</strong> Daemonless and rootless architecture eliminates the Docker daemon attack vector.</td>
-</tr>
-<tr>
-<td><strong>Directory</strong></td>
-<td><strong>Samba 4 AD</strong></td>
-<td><strong>Compatibility:</strong> Drop-in replacement for Active Directory. Supports Windows/Linux clients without CALs.</td>
-</tr>
-<tr>
-<td><strong>IAM / SSO</strong></td>
-<td><strong>Authentik</strong></td>
-<td><strong>Modern Identity:</strong> Bridges LDAP with OIDC/SAML. Enforces <strong>WebAuthn/TOTP MFA</strong> policy system-wide.</td>
-</tr>
-<tr>
-<td><strong>Email / Collab</strong></td>
-<td><strong>Zimbra CE</strong></td>
-<td><strong>Exchange Alternative:</strong> Full suite (Email, Calendar, Tasks). Includes ClamAV (Anti-virus) and SpamAssassin.</td>
-</tr>
-<tr>
-<td><strong>SIEM / XDR</strong></td>
-<td><strong>Wazuh</strong></td>
-<td><strong>Visibility:</strong> Correlates logs from OS, K8s, and Apps to detect anomalies (Digital Immune System).</td>
-</tr>
-</tbody></table>
-<table>
-<thead><tr>
-<th><strong>Observability</strong></th>
-<th><strong>Prometheus + Grafana</strong></th>
-<th><strong>Metrics:</strong> Industry standard for resource usage and application health monitoring.</th>
-</tr></thead><tbody>
-</tbody></table>
-<p>&gt; <strong>Note:</strong> This selection prioritizes open-source licenses, data sovereignty, and enterprise-grade maturity over "bleeding edge" features.</p>
+                        <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
+                        <h1>Tools &amp; Components</h1>
+                        <h2>Core Stack (Server)</h2>
+                        <table>
+                            <thead><tr><th>Category</th><th>Component</th><th>Key Features &amp; Rationale</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Operating System</strong></td><td><strong>Ubuntu Server LTS</strong></td><td>5y security updates; broad ecosystem; HWE kernel support.</td></tr>
+                                <tr><td><strong>Orchestration</strong></td><td><strong>Kubernetes (RKE2) + Rancher</strong></td><td>FIPS-capable K8s; Rancher UI/RBAC/upgrade pipeline.</td></tr>
+                                <tr><td><strong>Container Runtime</strong></td><td><strong>Podman</strong></td><td>Daemonless/rootless; Docker explicitly excluded to reduce attack surface.</td></tr>
+                                <tr><td><strong>Identity</strong></td><td><strong>Samba 4 AD</strong></td><td>AD-compatible source of truth; avoids CAL licensing.</td></tr>
+                                <tr><td><strong>SSO / MFA</strong></td><td><strong>Authentik</strong></td><td>OIDC/SAML; WebAuthn/TOTP; bridges LDAP/AD.</td></tr>
+                                <tr><td><strong>Collaboration</strong></td><td><strong>Zimbra CE + ClamAV + SpamAssassin</strong></td><td>Exchange/O365 alternative with built-in AV/AS.</td></tr>
+                                <tr><td><strong>SIEM / XDR</strong></td><td><strong>Wazuh</strong></td><td>Centralized detection/response; OS + K8s + app telemetry.</td></tr>
+                                <tr><td><strong>Metrics / Viz</strong></td><td><strong>Prometheus + Grafana</strong></td><td>De facto metrics and dashboard stack.</td></tr>
+                                <tr><td><strong>Storage (CSI)</strong></td><td><strong>Longhorn</strong></td><td>Distributed block storage; CSI snapshots for PVCs.</td></tr>
+                                <tr><td><strong>Load Balancing</strong></td><td><strong>MetalLB (L2)</strong></td><td>Bare-metal service publishing with ARP/NDP pools.</td></tr>
+                                <tr><td><strong>PKI</strong></td><td><strong>Cert-Manager</strong></td><td>Automated cert issuance (self-signed or internal CA).</td></tr>
+                                <tr><td><strong>Backup</strong></td><td><strong>Velero + MinIO (S3)</strong></td><td>Cluster + PVC backups with kopia/CSI to on-prem S3.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h2>Client Stack: The "Flexible 10" Model</h2>
+                        
+                        <h3>Philosophy</h3>
+                        <p>One-size-fits-all desktops create friction. A persona-based catalog of Ubuntu derivatives reduces resistance, speeds migration from Windows, and keeps support predictable.</p>
+
+                        <h3>The 10 Distributions</h3>
+                        <table>
+                            <thead><tr><th>#</th><th>Distribution</th><th>Target Persona</th><th>Why This Choice</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td><strong>Ubuntu Desktop</strong></td><td>Standard corporate user</td><td>Canonical baseline; stable, broad hardware support.</td></tr>
+                                <tr><td>2</td><td><strong>Linux Mint</strong> (Cinnamon)</td><td>Office / Admin</td><td>Windows-like workflow; minimal retraining.</td></tr>
+                                <tr><td>3</td><td><strong>Zorin OS</strong></td><td>Management / Exec</td><td>Premium, polished UI akin to Win11/macOS.</td></tr>
+                                <tr><td>4</td><td><strong>Pop!_OS</strong></td><td>Engineers / Devs</td><td>Tiling, good GPU support, dev tooling focus.</td></tr>
+                                <tr><td>5</td><td><strong>Kubuntu</strong></td><td>Power users</td><td>KDE customization for advanced users.</td></tr>
+                                <tr><td>6</td><td><strong>Xubuntu</strong></td><td>Legacy hardware</td><td>XFCE lightweight; extends life of old assets.</td></tr>
+                                <tr><td>7</td><td><strong>Lubuntu</strong></td><td>Thin clients</td><td>Ultra-light LXQt for low-resource endpoints.</td></tr>
+                                <tr><td>8</td><td><strong>Ubuntu MATE</strong></td><td>Traditionalists</td><td>Classic desktop metaphor; low learning curve.</td></tr>
+                                <tr><td>9</td><td><strong>elementary OS</strong></td><td>Kiosk / Public</td><td>Opinionated, focused UI; locked-down feel.</td></tr>
+                                <tr><td>10</td><td><strong>KDE Neon</strong></td><td>R&amp;D / Explorers</td><td>Latest KDE stack for experimentation.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Migration &amp; Training Plan</h3>
+                        
+                        <h4>Phase 1: Discover &amp; Map</h4>
+                        <ul>
+                            <li>Inventory Windows-only apps; classify: <strong>Replace</strong> (web/Linux alt), <strong>Emulate</strong> (Wine/Proton), <strong>Virtualize</strong> (VDI/local VM).</li>
+                            <li>Map personas to one of the 10 distros; pre-bake configs (browser, mail, VPN, printers).</li>
+                        </ul>
+
+                        <h4>Phase 2: Pilot</h4>
+                        <ul>
+                            <li>Start with Linux Mint for office and Pop!_OS for engineers (5–10 users each).</li>
+                            <li>Provide cheat sheets and a 30-minute onboarding ("where is file manager/print/VPN").</li>
+                        </ul>
+
+                        <h4>Phase 3: Rollout &amp; Support</h4>
+                        <ul>
+                            <li>Stage deployments by persona; enforce common SSO (Authentik) and mail (Zimbra) to simplify helpdesk.</li>
+                            <li>Track satisfaction/issue metrics; adjust distro choice only if blocking issues persist.</li>
+                        </ul>
+
+                        <h4>Phase 4: Optimize</h4>
+                        <ul>
+                            <li>Harden telemetry stance (disable vendor data sharing); push consistent security baselines via Ansible.</li>
+                            <li>Refresh low-end fleets with Lubuntu/Xubuntu; reserve KDE Neon for labs, not broad rollout.</li>
+                        </ul>
+
+                        <p><strong>Note:</strong> This selection prioritizes open-source licensing, data sovereignty, and operational maturity over "cloud convenience."</p>
         </div>
     </div>
 

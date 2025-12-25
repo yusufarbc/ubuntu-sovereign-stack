@@ -4,6 +4,17 @@ metadata:
   name: monitoring
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-data
+  namespace: monitoring
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
@@ -23,6 +34,13 @@ data:
       - job_name: 'wazuh'
         static_configs:
           - targets: ['wazuh-manager.security.svc:55000']
+      - job_name: 'rke2-nodes'
+        kubernetes_sd_configs:
+          - role: node
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+        metric_relabel_configs: []
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,7 +75,8 @@ spec:
           configMap:
             name: prometheus-config
         - name: data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: prometheus-data
 ---
 apiVersion: v1
 kind: Service

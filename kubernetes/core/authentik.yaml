@@ -3,6 +3,136 @@ kind: Namespace
 metadata:
   name: identity
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: authentik-secrets
+  namespace: identity
+type: Opaque
+stringData:
+  postgres-password: "change-me" # replace in production
+  authentik-secret-key: "generate-a-long-random-string" # replace in production
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: authentik-media
+  namespace: identity
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: authentik-redis
+  namespace: identity
+  labels:
+    app: authentik-redis
+spec:
+  serviceName: authentik-redis
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik-redis
+  template:
+    metadata:
+      labels:
+        app: authentik-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          args: ["--appendonly", "yes"]
+          ports:
+            - containerPort: 6379
+              name: redis
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentik-redis
+  namespace: identity
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: redis
+  selector:
+    app: authentik-redis
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: authentik-postgres
+  namespace: identity
+  labels:
+    app: authentik-postgres
+spec:
+  serviceName: authentik-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik-postgres
+  template:
+    metadata:
+      labels:
+        app: authentik-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15-alpine
+          env:
+            - name: POSTGRES_DB
+              value: "authentik"
+            - name: POSTGRES_USER
+              value: "authentik"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: postgres-password
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentik-postgres
+  namespace: identity
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: postgres
+  selector:
+    app: authentik-postgres
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,22 +159,35 @@ spec:
           command: ["./server"]
           env:
             - name: AUTHENTIK_REDIS__HOST
-              value: "redis"
+              value: "authentik-redis"
             - name: AUTHENTIK_POSTGRESQL__HOST
-              value: "postgresql"
+              value: "authentik-postgres"
             - name: AUTHENTIK_POSTGRESQL__USER
               value: "authentik"
             - name: AUTHENTIK_POSTGRESQL__NAME
               value: "authentik"
             - name: AUTHENTIK_POSTGRESQL__PASSWORD
-              value: "secret_password_change_me" # Replace with secret
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: postgres-password
             - name: AUTHENTIK_SECRET_KEY
-              value: "generate_a_random_secret_key_change_me" # Replace with secret
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: authentik-secret-key
           ports:
             - containerPort: 9000
               name: http
             - containerPort: 9443
               name: https
+          volumeMounts:
+            - name: media
+              mountPath: /media
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: authentik-media
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -72,17 +215,23 @@ spec:
           command: ["./worker"]
           env:
             - name: AUTHENTIK_REDIS__HOST
-              value: "redis"
+              value: "authentik-redis"
             - name: AUTHENTIK_POSTGRESQL__HOST
-              value: "postgresql"
+              value: "authentik-postgres"
             - name: AUTHENTIK_POSTGRESQL__USER
               value: "authentik"
             - name: AUTHENTIK_POSTGRESQL__NAME
               value: "authentik"
             - name: AUTHENTIK_POSTGRESQL__PASSWORD
-              value: "secret_password_change_me"
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: postgres-password
             - name: AUTHENTIK_SECRET_KEY
-              value: "generate_a_random_secret_key_change_me"
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: authentik-secret-key
 ---
 apiVersion: v1
 kind: Service

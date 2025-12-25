@@ -21,9 +21,19 @@ spec:
               name: web
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
-              value: "admin" # Change me
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin
+                  key: password
             - name: GF_USERS_ALLOW_SIGN_UP
               value: "false"
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: grafana-data
 ---
 apiVersion: v1
 kind: Service
@@ -38,3 +48,23 @@ spec:
       name: web
   selector:
     app: grafana
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-admin
+  namespace: monitoring
+type: Opaque
+stringData:
+  password: "change-me" # replace in production
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-data
+  namespace: monitoring
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 5Gi

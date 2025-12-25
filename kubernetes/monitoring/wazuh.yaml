@@ -34,7 +34,7 @@ spec:
               value: "http://elasticsearch:9200" # Requires External ES or Sidecar
   volumeClaimTemplates:
     - metadata:
-      name: wazuh-data
+        name: wazuh-data
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:

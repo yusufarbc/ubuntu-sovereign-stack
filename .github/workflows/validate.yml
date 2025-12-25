@@ -1,0 +1,39 @@
+name: Validate manifests
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python for yamllint
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install tools
+        run: |
+          pip install --upgrade pip
+          pip install yamllint
+          curl -L https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz -o kubeconform.tar.gz
+          tar -xzf kubeconform.tar.gz
+          sudo mv kubeconform /usr/local/bin/
+
+      - name: YAML lint
+        run: |
+          yamllint kubernetes .github/workflows infrastructure || exit 1
+
+      - name: Kubeconform validation
+        run: |
+          kubeconform -strict -summary -ignore-missing-schemas \
+            -skip CustomResourceDefinition \
+            kubernetes/**/*.yaml

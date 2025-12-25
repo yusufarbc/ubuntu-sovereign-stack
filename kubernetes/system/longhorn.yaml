@@ -6,6 +6,9 @@ metadata:
 # Note: In a real deployment, we would use the Helm Chart.
 # This is a placeholder manifest to indicate the architecture.
 # Longhorn provides distributed block storage for the cluster.
+# Install via Helm before applying workloads:
+# helm repo add longhorn https://charts.longhorn.io
+# helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
