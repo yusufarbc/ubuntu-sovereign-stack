@@ -38,10 +38,14 @@
                 <div class="docs-content">
                         <a href="index.html" class="nav-link" style="display:inline-block; margin-bottom:1rem; color:var(--primary); padding:0;">&larr; Back to Index</a>
                         <h1>Project Proposal: Ubuntu-Based Open-Source Sovereign Enterprise Architecture</h1>
-                        <p>&gt; *   <strong>Server:</strong> Kubernetes (Rancher)</p>
-                        <p>&gt; *   <strong>IAM/MFA:</strong> Authentik</p>
-                        <p>&gt; *   <strong>Directory:</strong> Samba AD + Zimbra CE</p>
-                        <p>&gt; *   <strong>Client:</strong> Ubuntu LTS and Derivatives</p>
+                        <blockquote>
+                            <ul>
+                                <li><strong>Server:</strong> Kubernetes (Rancher)</li>
+                                <li><strong>IAM/MFA:</strong> Authentik</li>
+                                <li><strong>Directory:</strong> Samba AD + Zimbra CE</li>
+                                <li><strong>Client:</strong> Ubuntu LTS and Derivatives</li>
+                            </ul>
+                        </blockquote>
 
                         <h2>Abstract</h2>
                         <p>This project presents a fully on-premise, Ubuntu LTS-based open-source enterprise architecture designed to reduce cloud dependence and strengthen data sovereignty. Server-side services run as containers on Kubernetes managed by Rancher; identity and MFA are provided by Authentik; directory and mail services are implemented with Samba 4 Active Directory and Zimbra Community Edition. Security and observability layers rely on Wazuh (SIEM) and Prometheus + Grafana (metrics and alerting). The network perimeter is protected by physical firewalls, and backups are handled by physical appliances (e.g., QNAP NAS). The initiative aims to produce comparative evidence—against Microsoft’s cloud-first ecosystem—across TCO, security, usability, and portability, with a primary legal focus on data residency and sovereignty.</p>
