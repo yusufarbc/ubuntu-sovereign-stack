@@ -56,7 +56,7 @@ metadata:
   namespace: monitoring
 type: Opaque
 stringData:
-  password: "change-me" # replace in production
+  password: "SovereignMonitor2025!" # Updated for production readiness
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

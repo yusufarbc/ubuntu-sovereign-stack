@@ -26,6 +26,7 @@ spec:
           # Note: Zimbra does not offer an official "cloud-native" container. 
           # This uses a popular community alternative or implies a custom build.
           # For Thesis: We assume a containerized build of Zimbra OSE with ClamAV & SpamAssassin included.
+          # WARNING: This image is a placeholder. You must build your own or use a trusted community image.
           image: zimbramail/zimbra-ose:latest 
           ports:
             - containerPort: 25

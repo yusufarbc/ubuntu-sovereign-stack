@@ -17,5 +17,5 @@ kubectl create namespace cattle-system
 helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
   --set hostname=rancher.sovereign.lan \
-  --set bootstrapPassword=admin \
+  --set bootstrapPassword=RancherInitial2025! \
   --set ingress.tls.source=rancher

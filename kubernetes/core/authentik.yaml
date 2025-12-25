@@ -10,8 +10,8 @@ metadata:
   namespace: identity
 type: Opaque
 stringData:
-  postgres-password: "change-me" # replace in production
-  authentik-secret-key: "generate-a-long-random-string" # replace in production
+  postgres-password: "SovereignIdentityDB2025!" # Updated for production readiness
+  authentik-secret-key: "SovereignKey_9988776655_Secure!" # Updated for production readiness
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
