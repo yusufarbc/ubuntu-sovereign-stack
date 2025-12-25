@@ -9,13 +9,13 @@ Enterprise workloads are increasingly bound to hyperscale clouds and their extra
 * **[Comparative Analysis](COMPARATIVE_ANALYSIS.md):** Ubuntu Sovereign Stack vs. Microsoft ecosystem; evaluation methodology and metrics.
 
 ## Deployment & Operations
-* **[Quick Start Guide](../QUICKSTART.md):** Get up and running in 2 hours (local or lab cluster).
+* **[Quick Start Guide](QUICKSTART.md):** Get up and running in 2 hours (local or lab cluster).
 * **[Cluster Setup Guide](CLUSTER_SETUP_GUIDE.md):** Step-by-step production deployment for RKE2, system layer, core services, and apps.
 * **[Deployment Order & Dependencies](DEPLOYMENT_ORDER.md):** Manifest execution sequence, phase breakdown, validation checkpoints.
 * **[Deployment Verification Checklist](DEPLOYMENT_CHECKLIST.md):** Post-installation validation, troubleshooting guide, performance checks, and sign-off procedures.
 * **[Operational Runbook](OPERATIONAL_RUNBOOK.md):** Day-2 operations: scaling, maintenance, rotations, backup/restore drills.
 * **[Security Hardening](SECURITY_HARDENING.md):** Network policies, RBAC, pod security, image policy, secrets, backup/DR controls.
-* **[Audit Report](../AUDIT_REPORT.md):** Gap analysis and remediation summary.
+* **[Audit Report](AUDIT_REPORT.md):** Gap analysis and remediation summary.
 
 ## Technical Architecture
 * **[System Architecture](ARCHITECTURE.md):** Topology, cluster design, storage, networking.

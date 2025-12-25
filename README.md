@@ -46,10 +46,10 @@ ansible-playbook -i hosts.ini setup-rke2.yml
 - website/ (static landing page)
 
 ## Key Documentation
-- [QUICKSTART.md](QUICKSTART.md): Local and 3-node lab setup in under 2 hours.
+- [docs/QUICKSTART.md](docs/QUICKSTART.md): Local and 3-node lab setup in under 2 hours.
 - [docs/CLUSTER_SETUP_GUIDE.md](docs/CLUSTER_SETUP_GUIDE.md): Production deployment (RKE2, system layer, identity, apps).
 - [docs/DEPLOYMENT_ORDER.md](docs/DEPLOYMENT_ORDER.md): Required manifest sequence and validation checkpoints.
 - [docs/DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md): Post-install validation, troubleshooting, sign-off.
 - [docs/OPERATIONAL_RUNBOOK.md](docs/OPERATIONAL_RUNBOOK.md): Day-2 operations (scaling, maintenance, rotations, restore drills).
 - [docs/SECURITY_HARDENING.md](docs/SECURITY_HARDENING.md): Network policies, RBAC, pod security, image policy, secrets.
-- [AUDIT_REPORT.md](AUDIT_REPORT.md): Gap analysis and remediation summary.
+- [docs/AUDIT_REPORT.md](docs/AUDIT_REPORT.md): Gap analysis and remediation summary.
